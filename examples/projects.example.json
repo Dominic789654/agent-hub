@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "projects": [
+    {
+      "id": "sample-project",
+      "name": "Sample Project",
+      "path": "./workspace/sample-project",
+      "description": "Portable example project entry for local development.",
+      "tags": ["example", "local"],
+      "executor": {
+        "type": "local-command",
+        "command": ["python", "-c", "print('hello from {project_id}')"],
+        "actions": {
+          "check": {
+            "name": "Check",
+            "description": "Run a portable sample action for this project.",
+            "command": ["python", "-c", "print('action {action_id} for {project_id}')"]
+          }
+        },
+        "task_templates": {
+          "summarize-input": {
+            "name": "Summarize Input",
+            "description": "Create a sample echo task from free-form input.",
+            "title": "Summarize: {input}",
+            "kind": "echo",
+            "payload": "summary request={input}",
+            "labels": ["template", "summary"]
+          }
+        },
+        "pipelines": {
+          "basic-check": {
+            "name": "Basic Check",
+            "description": "Run a sample action then echo the provided input.",
+            "steps": [
+              {
+                "id": "check",
+                "title": "Run check action",
+                "kind": "project_action",
+                "payload": "check"
+              },
+              {
+                "id": "echo",
+                "title": "Echo pipeline input",
+                "kind": "echo",
+                "payload": "pipeline input={input}",
+                "depends_on": ["check"]
+              }
+            ]
+          }
+        }
+      },
+      "enabled": true
+    }
+  ]
+}

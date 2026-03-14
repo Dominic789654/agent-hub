@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-hub"
+version = "0.1.0"
+description = "Portable open source MVP for a local-first agent task hub."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [
+  { name = "Open Source Contributors" }
+]
+keywords = ["agents", "automation", "sqlite", "python"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.7",
+]
+
+[project.scripts]
+agent-hub = "agent_hub.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_hub"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
