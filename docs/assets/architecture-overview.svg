@@ -1,0 +1,104 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">agent-hub architecture overview</title>
+  <desc id="desc">A static overview showing operator surfaces flowing into agent-hub core storage and dispatch, then out to project routing, pipelines, and human visibility surfaces.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="80" y1="40" x2="1120" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E1830"/>
+      <stop offset="1" stop-color="#121D3B"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#152248"/>
+      <stop offset="1" stop-color="#101933"/>
+    </linearGradient>
+    <linearGradient id="panelAccent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#1B2E63"/>
+      <stop offset="1" stop-color="#122147"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#78A8FF"/>
+      <stop offset="1" stop-color="#7EF0C4"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1200" height="760" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="20" stdDeviation="20" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10V0Z" fill="#78A8FF"/>
+    </marker>
+    <style>
+      .panel { fill: url(#panel); stroke: rgba(255,255,255,0.14); stroke-width: 1.4; }
+      .panel-accent { fill: url(#panelAccent); stroke: rgba(120,168,255,0.26); stroke-width: 1.6; }
+      .title { fill: #EBF0FF; font: 700 30px Inter, Arial, sans-serif; }
+      .subtitle { fill: #A8B3D1; font: 500 16px Inter, Arial, sans-serif; }
+      .box-title { fill: #EBF0FF; font: 700 20px Inter, Arial, sans-serif; }
+      .box-text { fill: #A8B3D1; font: 500 15px Inter, Arial, sans-serif; }
+      .box-text-small { fill: #A8B3D1; font: 500 14px Inter, Arial, sans-serif; }
+      .label { fill: #7EF0C4; font: 700 12px Inter, Arial, sans-serif; letter-spacing: 0.12em; }
+      .edge { stroke: #78A8FF; stroke-width: 3; stroke-linecap: round; fill: none; marker-end: url(#arrow); opacity: 0.95; }
+      .edge-soft { stroke: #7EF0C4; stroke-width: 3; stroke-linecap: round; fill: none; marker-end: url(#arrow); opacity: 0.9; }
+      .edge-muted { stroke: rgba(255,255,255,0.4); stroke-width: 2.4; stroke-linecap: round; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect x="40" y="30" width="1120" height="700" rx="34" fill="url(#bg)" stroke="rgba(255,255,255,0.12)" filter="url(#shadow)"/>
+
+  <text x="92" y="96" class="title">agent-hub architecture overview</text>
+  <text x="92" y="126" class="subtitle">Local-first operator surfaces, durable queue state, explicit dispatch, and project-backed execution.</text>
+
+  <rect x="88" y="178" width="250" height="150" rx="24" class="panel"/>
+  <text x="116" y="214" class="label">OPERATOR SURFACES</text>
+  <text x="116" y="252" class="box-title">CLI · HTTP · Browser UI</text>
+  <text x="116" y="284" class="box-text">One control surface for task intake,</text>
+  <text x="116" y="308" class="box-text">inspection, retry, cancellation,</text>
+  <text x="116" y="332" class="box-text">and manual triage.</text>
+
+  <rect x="420" y="156" width="360" height="220" rx="28" class="panel-accent"/>
+  <text x="450" y="192" class="label">CORE CONTROL PLANE</text>
+  <text x="450" y="230" class="box-title">Repository + SQLite state</text>
+  <text x="450" y="262" class="box-text">Tasks, dependency edges, run history,</text>
+  <text x="450" y="286" class="box-text">retry policy, blocked propagation,</text>
+  <text x="450" y="310" class="box-text">notes, labels, and saved views.</text>
+
+  <rect x="452" y="328" width="130" height="30" rx="15" fill="rgba(120,168,255,0.12)" stroke="rgba(120,168,255,0.32)"/>
+  <text x="472" y="348" class="box-text-small">db.py</text>
+  <rect x="592" y="328" width="160" height="30" rx="15" fill="rgba(126,240,196,0.10)" stroke="rgba(126,240,196,0.26)"/>
+  <text x="612" y="348" class="box-text-small">repository.py</text>
+
+  <rect x="846" y="176" width="270" height="150" rx="24" class="panel"/>
+  <text x="874" y="212" class="label">EXECUTION</text>
+  <text x="874" y="250" class="box-title">Dispatcher</text>
+  <text x="874" y="282" class="box-text">Claims ready tasks, enforces</text>
+  <text x="874" y="306" class="box-text">dependency completion, and</text>
+  <text x="874" y="330" class="box-text">executes bounded work.</text>
+
+  <rect x="824" y="418" width="292" height="116" rx="24" class="panel"/>
+  <text x="852" y="454" class="label">PROJECT ROUTING</text>
+  <text x="852" y="492" class="box-title">Executors · Actions · Projects</text>
+  <text x="852" y="524" class="box-text">Routes work into local repos,</text>
+  <text x="852" y="548" class="box-text">commands, and project-backed actions.</text>
+
+  <rect x="432" y="450" width="308" height="154" rx="24" class="panel"/>
+  <text x="460" y="486" class="label">FLOW EXPANSION</text>
+  <text x="460" y="524" class="box-title">Task templates · Pipelines</text>
+  <text x="460" y="556" class="box-text">Instantiate reusable single-task</text>
+  <text x="460" y="580" class="box-text">or multi-step graphs with</text>
+  <text x="460" y="604" class="box-text">explicit dependency edges.</text>
+
+  <rect x="88" y="446" width="264" height="170" rx="24" class="panel"/>
+  <text x="116" y="482" class="label">VISIBILITY</text>
+  <text x="116" y="520" class="box-title">Dashboard · Human inbox</text>
+  <text x="116" y="552" class="box-text">Expose current queue state,</text>
+  <text x="116" y="576" class="box-text">failed or blocked work, and</text>
+  <text x="116" y="600" class="box-text">manual-review surfaces.</text>
+
+  <path d="M338 252H408" class="edge"/>
+  <path d="M780 252H834" class="edge"/>
+  <path d="M972 326V408" class="edge"/>
+  <path d="M824 474H752" class="edge-soft"/>
+  <path d="M420 266C364 266 320 274 292 302C254 340 252 388 252 436" class="edge-muted"/>
+  <path d="M586 376V438" class="edge"/>
+  <path d="M420 560H364" class="edge-soft"/>
+
+  <rect x="92" y="658" width="1016" height="42" rx="21" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)"/>
+  <text x="122" y="684" class="box-text-small">Operator surfaces feed the durable queue. The dispatcher only claims ready work. Project routes and pipelines stay explicit, and unresolved cases surface back through visibility layers.</text>
+</svg>

@@ -272,6 +272,18 @@
         box-shadow: var(--shadow);
       }
 
+      .diagram-frame {
+        overflow: hidden;
+        padding: 0;
+      }
+
+      .diagram-frame img {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: rgba(255, 255, 255, 0.02);
+      }
+
       .terminal-bar {
         display: flex;
         align-items: center;
@@ -507,16 +519,12 @@
         </div>
 
         <div class="grid grid-2">
-          <div class="terminal">
+          <div class="terminal diagram-frame">
             <div class="terminal-bar">
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span style="margin-left: 0.35rem; color: var(--muted);">dependency shape</span>
+              <span style="margin-left: 0.35rem; color: var(--muted);">static architecture diagram</span>
             </div>
-            <pre><code>cli -> db -> repository <- dispatcher
-                      ^
-                      └-> web
-dispatcher -> services/executors -> projects
-dispatcher -> services/pipelines  -> queued task graphs</code></pre>
+            <img src="./assets/architecture-overview.svg" alt="Agent Hub architecture overview diagram">
           </div>
 
           <article class="card">
@@ -530,6 +538,10 @@ dispatcher -> services/pipelines  -> queued task graphs</code></pre>
               <li><code>services/executors.py</code> routes project-backed commands</li>
               <li><code>services/pipelines.py</code> expands pipeline templates into task graphs</li>
             </ul>
+            <div class="hero-actions" style="margin-top: 1rem;">
+              <a class="button" href="./assets/architecture-overview.svg">Open SVG</a>
+              <a class="button" href="./architecture.md">Read architecture notes</a>
+            </div>
           </article>
         </div>
       </div>
