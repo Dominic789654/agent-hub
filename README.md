@@ -15,7 +15,9 @@ The codebase stays intentionally small and uses the Python standard library only
 
 - landing page: `docs/index.html`
 - demo guide: `docs/demo.md`
+- demo page: `docs/demo.html`
 - public release: `https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0`
+- GitHub Pages publish is wired through `.github/workflows/pages.yml`
 
 ## What It Does
 
@@ -80,7 +82,7 @@ Then open:
 - `http://127.0.0.1:8080/app`
 - `http://127.0.0.1:8080/dashboard`
 
-More guided steps live in `docs/demo.md`.
+More guided steps live in `docs/demo.md`, and the browser-friendly version lives in `docs/demo.html`.
 
 ## Default Local State
 

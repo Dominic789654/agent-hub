@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>agent-hub demo guide</title>
+    <meta
+      name="description"
+      content="Quick local walkthrough for the agent-hub OSS MVP."
+    >
+    <style>
+      :root {
+        --bg: #0b1020;
+        --panel: #111933;
+        --panel-2: #172142;
+        --text: #ebf0ff;
+        --muted: #a8b3d1;
+        --line: rgba(255, 255, 255, 0.12);
+        --accent: #78a8ff;
+        --accent-2: #7ef0c4;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(120, 168, 255, 0.16), transparent 24%),
+          var(--bg);
+        color: var(--text);
+      }
+
+      a { color: inherit; text-decoration: none; }
+      .container { width: min(920px, calc(100% - 32px)); margin: 0 auto; }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(18px);
+        background: rgba(11, 16, 32, 0.74);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.9rem 0;
+      }
+
+      .brand { font-weight: 700; }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 0.95rem;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      .hero { padding: 3.5rem 0 2rem; }
+      h1 { margin: 0 0 0.8rem; font-size: clamp(2rem, 5vw, 3.4rem); }
+      p.lead { color: var(--muted); line-height: 1.75; }
+
+      .section { padding: 0.8rem 0 1.6rem; }
+      .card {
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, var(--panel), var(--panel-2));
+        border-radius: 18px;
+        padding: 1.1rem 1.15rem;
+      }
+
+      h2 { margin: 0 0 0.75rem; font-size: 1.4rem; }
+      h3 { margin: 0 0 0.55rem; font-size: 1rem; }
+      p, li { color: var(--muted); line-height: 1.7; }
+      ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        padding: 0.16rem 0.45rem;
+      }
+      pre {
+        margin: 0.7rem 0 0;
+        overflow-x: auto;
+        padding: 0.9rem 1rem;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.22);
+        color: #d7e4ff;
+        line-height: 1.7;
+      }
+      .grid {
+        display: grid;
+        gap: 1rem;
+      }
+      .footer {
+        padding: 1rem 0 3rem;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="container nav-inner">
+        <div class="brand">agent-hub</div>
+        <a class="button" href="./index.html">Back to homepage</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="container">
+        <h1>Demo guide</h1>
+        <p class="lead">
+          This is the fastest local walkthrough for the current OSS MVP. Start the web surface,
+          run the dispatcher, queue a small amount of sample work, and inspect the dashboard.
+        </p>
+      </div>
+    </header>
+
+    <main class="container grid">
+      <section class="section card">
+        <h2>1. Install</h2>
+        <pre><code>python -m venv .venv
+source .venv/bin/activate
+pip install -e .[dev]</code></pre>
+      </section>
+
+      <section class="section card">
+        <h2>2. Start the web surface</h2>
+        <pre><code>python -m agent_hub serve --port 8080</code></pre>
+        <ul>
+          <li><code>http://127.0.0.1:8080/</code></li>
+          <li><code>http://127.0.0.1:8080/app</code></li>
+          <li><code>http://127.0.0.1:8080/dashboard</code></li>
+        </ul>
+      </section>
+
+      <section class="section card">
+        <h2>3. Start the dispatcher</h2>
+        <pre><code>python -m agent_hub dispatch</code></pre>
+      </section>
+
+      <section class="section card">
+        <h2>4. Queue example work</h2>
+        <pre><code>python -m agent_hub create-task "hello world" --kind echo --payload "hi"
+python -m agent_hub run-task-template sample-project summarize-input --input "review this operator note"
+python -m agent_hub run-pipeline sample-project sample-flow --input "demo"</code></pre>
+      </section>
+
+      <section class="section card">
+        <h2>5. Exercise human handoff</h2>
+        <pre><code>TASK_ID=$(python -m agent_hub create-task "manual review" --kind noop | python - &lt;&lt;'PY'
+import json,sys
+print(json.load(sys.stdin)["id"])
+PY
+)
+python -m agent_hub mark-needs-human "$TASK_ID" --note "manual review required"
+python -m agent_hub add-task-label "$TASK_ID" priority
+python -m agent_hub add-task-note "$TASK_ID" "operator should inspect context"
+python -m agent_hub list-human-inbox</code></pre>
+      </section>
+
+      <section class="section card">
+        <h2>6. Exercise saved queries</h2>
+        <pre><code>python -m agent_hub create-saved-query tasks "Needs Human" --filter status=needs_human
+python -m agent_hub list-saved-queries
+
+python -m agent_hub apply-saved-query &lt;query-id&gt;</code></pre>
+      </section>
+
+      <section class="section card">
+        <h2>7. Confirm dashboard snapshot</h2>
+        <pre><code>python -m agent_hub dashboard
+curl -s http://127.0.0.1:8080/dashboard | sed -n '1,80p'</code></pre>
+      </section>
+
+      <section class="section card">
+        <h2>Expected result</h2>
+        <ul>
+          <li>Tasks move through the queue.</li>
+          <li>The browser app renders current state.</li>
+          <li>The human inbox shows manual-triage work.</li>
+          <li>Saved queries return matching results.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">agent-hub demo guide · OSS MVP</div>
+    </footer>
+  </body>
+</html>
