@@ -13,6 +13,7 @@ The codebase stays intentionally small and uses the Python standard library only
 
 ## Project Site
 
+- live site: `https://dominic789654.github.io/agent-hub/`
 - landing page: `docs/index.html`
 - demo guide: `docs/demo.md`
 - demo page: `docs/demo.html`
