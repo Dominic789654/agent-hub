@@ -11,6 +11,12 @@ This OSS repo is the portable, public-safe slice of the broader idea:
 
 The codebase stays intentionally small and uses the Python standard library only.
 
+## Project Site
+
+- landing page: `docs/index.html`
+- demo guide: `docs/demo.md`
+- public release: `https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0`
+
 ## What It Does
 
 `agent-hub` currently supports:
