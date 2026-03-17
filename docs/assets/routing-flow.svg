@@ -1,0 +1,102 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Natural language to multi-project routing flow</title>
+  <desc id="desc">A static flow showing an operator request entering agent hub, being normalized into bounded tasks, routed by project, scheduled with dependencies, dispatched to multiple repos, and surfaced back through dashboard and human inbox.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="70" y1="30" x2="1130" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E1830"/>
+      <stop offset="1" stop-color="#121D3B"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#16244B"/>
+      <stop offset="1" stop-color="#101933"/>
+    </linearGradient>
+    <linearGradient id="panel2" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#1A2D5C"/>
+      <stop offset="1" stop-color="#132146"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10V0Z" fill="#78A8FF"/>
+    </marker>
+    <marker id="arrowMint" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10V0Z" fill="#7EF0C4"/>
+    </marker>
+    <style>
+      .title { fill: #EBF0FF; font: 700 30px Inter, Arial, sans-serif; }
+      .subtitle { fill: #A8B3D1; font: 500 16px Inter, Arial, sans-serif; }
+      .box { fill: url(#panel); stroke: rgba(255,255,255,0.14); stroke-width: 1.4; }
+      .box-accent { fill: url(#panel2); stroke: rgba(120,168,255,0.24); stroke-width: 1.6; }
+      .label { fill: #7EF0C4; font: 700 12px Inter, Arial, sans-serif; letter-spacing: 0.12em; }
+      .box-title { fill: #EBF0FF; font: 700 20px Inter, Arial, sans-serif; }
+      .box-text { fill: #A8B3D1; font: 500 15px Inter, Arial, sans-serif; }
+      .edge { stroke: #78A8FF; stroke-width: 3.2; stroke-linecap: round; fill: none; marker-end: url(#arrow); }
+      .edge-mint { stroke: #7EF0C4; stroke-width: 3.2; stroke-linecap: round; fill: none; marker-end: url(#arrowMint); }
+      .edge-dashed { stroke: rgba(255,255,255,0.48); stroke-width: 2.4; stroke-linecap: round; fill: none; stroke-dasharray: 10 10; marker-end: url(#arrow); }
+      .caption { fill: #D8E3FF; font: 600 13px Inter, Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <rect x="40" y="30" width="1120" height="700" rx="34" fill="url(#bg)" stroke="rgba(255,255,255,0.12)"/>
+
+  <text x="92" y="96" class="title">From operator request to multi-project execution</text>
+  <text x="92" y="126" class="subtitle">Turn one request into bounded project tasks, schedule dependencies explicitly, then route results and exceptions back to the operator.</text>
+
+  <rect x="88" y="176" width="220" height="130" rx="24" class="box"/>
+  <text x="116" y="212" class="label">INPUT</text>
+  <text x="116" y="248" class="box-title">Natural-language request</text>
+  <text x="116" y="278" class="box-text">An operator describes work</text>
+  <text x="116" y="302" class="box-text">without needing to pre-split</text>
+  <text x="116" y="326" class="box-text">every implementation step.</text>
+
+  <rect x="372" y="156" width="312" height="172" rx="26" class="box-accent"/>
+  <text x="400" y="192" class="label">CONTROL PLANE</text>
+  <text x="400" y="228" class="box-title">Interpret + normalize</text>
+  <text x="400" y="258" class="box-text">Resolve project targets, turn</text>
+  <text x="400" y="282" class="box-text">intent into bounded tasks,</text>
+  <text x="400" y="306" class="box-text">attach deliverables, labels,</text>
+  <text x="400" y="330" class="box-text">and dependency rules.</text>
+
+  <rect x="760" y="176" width="276" height="130" rx="24" class="box"/>
+  <text x="788" y="212" class="label">QUEUEING</text>
+  <text x="788" y="248" class="box-title">Pending, staged, ready</text>
+  <text x="788" y="278" class="box-text">Tasks enter the correct queue</text>
+  <text x="788" y="302" class="box-text">state before any execution.</text>
+
+  <rect x="246" y="414" width="252" height="132" rx="24" class="box"/>
+  <text x="274" y="450" class="label">SCHEDULING</text>
+  <text x="274" y="486" class="box-title">Dependency-aware release</text>
+  <text x="274" y="516" class="box-text">Serial work waits. Independent</text>
+  <text x="274" y="540" class="box-text">tasks can run in parallel.</text>
+
+  <rect x="546" y="396" width="282" height="168" rx="24" class="box"/>
+  <text x="574" y="432" class="label">ROUTING</text>
+  <text x="574" y="468" class="box-title">Project-backed execution</text>
+  <text x="574" y="498" class="box-text">Route bounded work into local repos,</text>
+  <text x="574" y="522" class="box-text">actions, templates, pipelines, or</text>
+  <text x="574" y="546" class="box-text">other controlled executor surfaces.</text>
+
+  <rect x="888" y="388" width="226" height="184" rx="24" class="box"/>
+  <text x="916" y="424" class="label">TARGETS</text>
+  <text x="916" y="460" class="box-title">Many local repositories</text>
+  <text x="916" y="490" class="box-text">Project A</text>
+  <text x="916" y="516" class="box-text">Project B</text>
+  <text x="916" y="542" class="box-text">Project C</text>
+  <text x="916" y="568" class="box-text">...plus bounded follow-up tasks</text>
+
+  <rect x="88" y="604" width="1026" height="78" rx="24" class="box"/>
+  <text x="116" y="640" class="label">RETURN PATH</text>
+  <text x="116" y="676" class="box-title">Dashboard, notes, inbox, retry, and human handoff keep results visible.</text>
+
+  <path d="M308 242H360" class="edge"/>
+  <path d="M684 242H748" class="edge"/>
+  <path d="M888 306C842 344 812 368 760 396" class="edge"/>
+  <path d="M760 306C658 360 586 390 498 446" class="edge-dashed"/>
+  <path d="M498 480H534" class="edge"/>
+  <path d="M828 480H876" class="edge-mint"/>
+  <path d="M998 572V594" class="edge"/>
+  <path d="M246 546C194 566 162 580 138 604" class="edge-dashed"/>
+
+  <text x="712" y="376" class="caption">release ready work</text>
+  <text x="600" y="382" class="caption">respect serial dependencies</text>
+  <text x="948" y="612" class="caption">status back to operator</text>
+</svg>
