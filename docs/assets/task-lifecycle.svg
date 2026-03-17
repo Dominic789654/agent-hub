@@ -1,0 +1,120 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">agent-hub task lifecycle</title>
+  <desc id="desc">A static lifecycle diagram showing task intake, ready queue, dispatcher execution, success, retry, blocked, and needs human paths.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="100" y1="30" x2="1100" y2="670" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E1830"/>
+      <stop offset="1" stop-color="#121D3B"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#16244B"/>
+      <stop offset="1" stop-color="#101933"/>
+    </linearGradient>
+    <linearGradient id="success" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#153F39"/>
+      <stop offset="1" stop-color="#0F2928"/>
+    </linearGradient>
+    <linearGradient id="warning" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#48361D"/>
+      <stop offset="1" stop-color="#2F2414"/>
+    </linearGradient>
+    <linearGradient id="danger" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#492233"/>
+      <stop offset="1" stop-color="#2D1721"/>
+    </linearGradient>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10V0Z" fill="#78A8FF"/>
+    </marker>
+    <marker id="arrowMint" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10V0Z" fill="#7EF0C4"/>
+    </marker>
+    <marker id="arrowRose" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10V0Z" fill="#F08AA8"/>
+    </marker>
+    <style>
+      .title { fill: #EBF0FF; font: 700 30px Inter, Arial, sans-serif; }
+      .subtitle { fill: #A8B3D1; font: 500 16px Inter, Arial, sans-serif; }
+      .box { fill: url(#panel); stroke: rgba(255,255,255,0.14); stroke-width: 1.4; }
+      .box-success { fill: url(#success); stroke: rgba(126,240,196,0.34); stroke-width: 1.4; }
+      .box-warning { fill: url(#warning); stroke: rgba(255,209,102,0.34); stroke-width: 1.4; }
+      .box-danger { fill: url(#danger); stroke: rgba(240,138,168,0.34); stroke-width: 1.4; }
+      .label { fill: #7EF0C4; font: 700 12px Inter, Arial, sans-serif; letter-spacing: 0.12em; }
+      .box-title { fill: #EBF0FF; font: 700 20px Inter, Arial, sans-serif; }
+      .box-text { fill: #A8B3D1; font: 500 15px Inter, Arial, sans-serif; }
+      .edge { stroke: #78A8FF; stroke-width: 3.2; stroke-linecap: round; fill: none; marker-end: url(#arrowBlue); }
+      .edge-success { stroke: #7EF0C4; stroke-width: 3.2; stroke-linecap: round; fill: none; marker-end: url(#arrowMint); }
+      .edge-danger { stroke: #F08AA8; stroke-width: 3.2; stroke-linecap: round; fill: none; marker-end: url(#arrowRose); }
+      .edge-dashed { stroke: rgba(255,255,255,0.48); stroke-width: 2.4; stroke-linecap: round; fill: none; stroke-dasharray: 10 10; marker-end: url(#arrowBlue); }
+      .caption { fill: #D8E3FF; font: 600 13px Inter, Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <rect x="40" y="30" width="1120" height="640" rx="34" fill="url(#bg)" stroke="rgba(255,255,255,0.12)"/>
+
+  <text x="92" y="96" class="title">Task lifecycle and handoff</text>
+  <text x="92" y="126" class="subtitle">Queue bounded work, run only ready tasks, and surface hard cases explicitly instead of hiding them.</text>
+
+  <rect x="88" y="190" width="210" height="110" rx="24" class="box"/>
+  <text x="116" y="224" class="label">INTAKE</text>
+  <text x="116" y="258" class="box-title">Task created</text>
+  <text x="116" y="286" class="box-text">Direct task, template,</text>
+  <text x="116" y="308" class="box-text">or pipeline expansion.</text>
+
+  <rect x="352" y="190" width="240" height="110" rx="24" class="box"/>
+  <text x="380" y="224" class="label">QUEUE STATE</text>
+  <text x="380" y="258" class="box-title">Ready or waiting</text>
+  <text x="380" y="286" class="box-text">Dependencies decide whether</text>
+  <text x="380" y="308" class="box-text">a task is schedulable now.</text>
+
+  <rect x="648" y="190" width="228" height="110" rx="24" class="box"/>
+  <text x="676" y="224" class="label">DISPATCH</text>
+  <text x="676" y="258" class="box-title">Claim + execute</text>
+  <text x="676" y="286" class="box-text">Dispatcher runs only</text>
+  <text x="676" y="308" class="box-text">ready bounded work.</text>
+
+  <rect x="936" y="120" width="178" height="98" rx="22" class="box-success"/>
+  <text x="964" y="154" class="label">OUTCOME</text>
+  <text x="964" y="186" class="box-title">Completed</text>
+  <text x="964" y="214" class="box-text">Success path.</text>
+
+  <rect x="936" y="244" width="178" height="102" rx="22" class="box-warning"/>
+  <text x="964" y="278" class="label">OUTCOME</text>
+  <text x="964" y="310" class="box-title">Retryable failure</text>
+  <text x="964" y="338" class="box-text">Retry or fix inputs.</text>
+
+  <rect x="312" y="412" width="228" height="112" rx="24" class="box-warning"/>
+  <text x="340" y="446" class="label">DEPENDENCY EFFECT</text>
+  <text x="340" y="480" class="box-title">Blocked</text>
+  <text x="340" y="508" class="box-text">Upstream failure keeps</text>
+  <text x="340" y="530" class="box-text">downstream work from running.</text>
+
+  <rect x="650" y="412" width="228" height="112" rx="24" class="box-danger"/>
+  <text x="678" y="446" class="label">HANDOFF</text>
+  <text x="678" y="480" class="box-title">Needs human</text>
+  <text x="678" y="508" class="box-text">Manual review, ambiguity,</text>
+  <text x="678" y="530" class="box-text">or operator decision required.</text>
+
+  <rect x="938" y="412" width="176" height="112" rx="24" class="box"/>
+  <text x="966" y="446" class="label">VISIBILITY</text>
+  <text x="966" y="480" class="box-title">Inbox + notes</text>
+  <text x="966" y="508" class="box-text">Surface failures,</text>
+  <text x="966" y="530" class="box-text">labels, and context.</text>
+
+  <rect x="88" y="568" width="1026" height="58" rx="22" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)"/>
+  <text x="120" y="604" class="box-text">The point is not to automate forever. The point is to make queue state, retry decisions, blocked paths, and manual intervention obvious.</text>
+
+  <path d="M298 245H342" class="edge"/>
+  <path d="M592 245H638" class="edge"/>
+  <path d="M876 230H926" class="edge-success"/>
+  <path d="M876 274H926" class="edge"/>
+  <path d="M762 300V402" class="edge-danger"/>
+  <path d="M936 295C856 330 768 360 566 445" class="edge-dashed"/>
+  <path d="M878 468H928" class="edge"/>
+  <path d="M1026 346V402" class="edge"/>
+
+  <text x="900" y="286" class="caption">retry</text>
+  <text x="706" y="370" class="caption">manual handoff</text>
+  <text x="736" y="250" class="caption">run</text>
+  <text x="432" y="556" class="caption">downstream impact</text>
+</svg>
