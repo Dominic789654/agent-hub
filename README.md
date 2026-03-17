@@ -23,8 +23,25 @@ The codebase stays intentionally small and uses the Python standard library only
 - landing page: `docs/index.html`
 - demo guide: `docs/demo.md`
 - demo page: `docs/demo.html`
+- public launch checklist: `docs/public-launch-checklist.md`
 - public release: `https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0`
 - GitHub Pages publish is wired through `.github/workflows/pages.yml`
+
+## Current Status
+
+Current status: public-safe OSS MVP.
+
+- ready to share as a local-first, single-operator control plane baseline
+- suitable for demos, exploration, and extension in local environments
+- not yet positioned as a mature hosted platform or stable long-term API surface
+- scope is intentionally constrained to queueing, routing, visibility, and handoff
+
+## Near-Term Roadmap
+
+- improve example projects and end-to-end walkthroughs
+- add richer screenshots or UI captures for the public site
+- tighten public API framing and compatibility expectations
+- expand executor and policy examples without turning the repo into a heavy platform
 
 ## What It Does
 
