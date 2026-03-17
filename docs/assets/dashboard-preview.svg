@@ -1,0 +1,177 @@
+<svg width="1440" height="980" viewBox="0 0 1440 980" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">agent-hub dashboard preview</title>
+  <desc id="desc">A high-fidelity static preview based on the real agent-hub browser dashboard layout, populated with representative queue, inbox, pipeline, and saved query data.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="80" y1="20" x2="1360" y2="940" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6F8FA"/>
+      <stop offset="1" stop-color="#EEF2F7"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1440" height="980" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="20" stdDeviation="22" flood-color="#0B1020" flood-opacity="0.16"/>
+    </filter>
+    <style>
+      .frame { fill: white; stroke: #D0D7DE; stroke-width: 1.2; }
+      .panel { fill: white; stroke: #D0D7DE; stroke-width: 1.1; }
+      .muted { fill: #57606A; font: 500 16px Inter, Arial, sans-serif; }
+      .title { fill: #24292F; font: 700 34px Inter, Arial, sans-serif; }
+      .section-title { fill: #24292F; font: 700 20px Inter, Arial, sans-serif; }
+      .card-k { fill: #57606A; font: 700 14px Inter, Arial, sans-serif; }
+      .card-v { fill: #24292F; font: 700 28px Inter, Arial, sans-serif; }
+      .ok { fill: #1A7F37; font: 700 28px Inter, Arial, sans-serif; }
+      .warn { fill: #9A6700; font: 700 28px Inter, Arial, sans-serif; }
+      .bad { fill: #CF222E; font: 700 28px Inter, Arial, sans-serif; }
+      .th { fill: #57606A; font: 700 14px Inter, Arial, sans-serif; }
+      .td { fill: #24292F; font: 500 14px Inter, Arial, sans-serif; }
+      .code { fill: #24292F; font: 500 13px "SFMono-Regular", Consolas, monospace; }
+      .link { fill: #0969DA; font: 500 14px Inter, Arial, sans-serif; }
+      .pillText { fill: #0969DA; font: 600 12px Inter, Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1440" height="980" fill="url(#bg)"/>
+  <rect x="80" y="48" width="1280" height="884" rx="22" class="frame" filter="url(#shadow)"/>
+
+  <rect x="80" y="48" width="1280" height="48" rx="22" fill="#FFFFFF"/>
+  <circle cx="114" cy="72" r="6" fill="#FF5F57"/>
+  <circle cx="136" cy="72" r="6" fill="#FEBC2E"/>
+  <circle cx="158" cy="72" r="6" fill="#28C840"/>
+
+  <text x="132" y="148" class="title">agent-hub dashboard</text>
+  <text x="132" y="176" class="muted">Thin client powered by /dashboard</text>
+  <text x="1034" y="170" class="muted">Classic view · JSON · updated 01:41:32</text>
+
+  <!-- summary cards -->
+  <g>
+    <rect x="132" y="214" width="110" height="86" rx="10" class="panel"/>
+    <text x="152" y="244" class="card-k">Dispatcher</text>
+    <text x="152" y="279" class="ok">idle</text>
+
+    <rect x="258" y="214" width="170" height="86" rx="10" class="panel"/>
+    <text x="278" y="244" class="card-k">Heartbeat</text>
+    <text x="278" y="279" class="card-v" style="font-size:18px;">01:41:27</text>
+
+    <rect x="444" y="214" width="94" height="86" rx="10" class="panel"/>
+    <text x="464" y="244" class="card-k">Queued</text>
+    <text x="464" y="279" class="bad">1</text>
+
+    <rect x="554" y="214" width="94" height="86" rx="10" class="panel"/>
+    <text x="574" y="244" class="card-k">Running</text>
+    <text x="574" y="279" class="ok">0</text>
+
+    <rect x="664" y="214" width="94" height="86" rx="10" class="panel"/>
+    <text x="684" y="244" class="card-k">Failed</text>
+    <text x="684" y="279" class="bad">1</text>
+
+    <rect x="774" y="214" width="124" height="86" rx="10" class="panel"/>
+    <text x="794" y="244" class="card-k">Needs Human</text>
+    <text x="794" y="279" class="warn">1</text>
+
+    <rect x="914" y="214" width="102" height="86" rx="10" class="panel"/>
+    <text x="934" y="244" class="card-k">Blocked</text>
+    <text x="934" y="279" class="warn">1</text>
+
+    <rect x="1032" y="214" width="126" height="86" rx="10" class="panel"/>
+    <text x="1052" y="244" class="card-k">Human Inbox</text>
+    <text x="1052" y="279" class="warn">3</text>
+
+    <rect x="1174" y="214" width="86" height="86" rx="10" class="panel"/>
+    <text x="1194" y="244" class="card-k">Runs</text>
+    <text x="1194" y="279" class="card-v">3</text>
+  </g>
+
+  <!-- panels row 1 -->
+  <rect x="132" y="330" width="566" height="244" rx="10" class="panel"/>
+  <text x="156" y="364" class="section-title">Human Inbox</text>
+  <line x1="132" y1="384" x2="698" y2="384" stroke="#D8DEE4"/>
+  <text x="156" y="414" class="th">Project</text>
+  <text x="246" y="414" class="th">Task</text>
+  <text x="462" y="414" class="th">Status</text>
+  <text x="544" y="414" class="th">Reason</text>
+  <text x="632" y="414" class="th">Labels</text>
+
+  <line x1="148" y1="428" x2="682" y2="428" stroke="#E7EBEF"/>
+  <text x="156" y="452" class="code">-</text>
+  <text x="246" y="452" class="link">Manual review: publish copy</text>
+  <text x="462" y="452" class="warn" style="font-size:14px;">needs_human</text>
+  <text x="544" y="452" class="td">review homepage copy</text>
+  <rect x="632" y="438" width="72" height="24" rx="999" fill="#DDF4FF"/>
+  <text x="648" y="454" class="pillText">marketing</text>
+
+  <line x1="148" y1="474" x2="682" y2="474" stroke="#E7EBEF"/>
+  <text x="156" y="498" class="code">sample-project</text>
+  <text x="246" y="498" class="link">Echo pipeline input</text>
+  <text x="462" y="498" class="warn" style="font-size:14px;">blocked</text>
+  <text x="544" y="498" class="td">blocked by failed dep</text>
+  <text x="632" y="498" class="td">-</text>
+
+  <line x1="148" y1="520" x2="682" y2="520" stroke="#E7EBEF"/>
+  <text x="156" y="544" class="code">sample-project</text>
+  <text x="246" y="544" class="link">Show sample status</text>
+  <text x="462" y="544" class="bad" style="font-size:14px;">failed</text>
+  <text x="544" y="544" class="td">workspace missing</text>
+  <text x="632" y="544" class="td">-</text>
+
+  <rect x="730" y="330" width="530" height="244" rx="10" class="panel"/>
+  <text x="754" y="364" class="section-title">Recent Tasks</text>
+  <line x1="730" y1="384" x2="1260" y2="384" stroke="#D8DEE4"/>
+  <text x="754" y="414" class="th">Project</text>
+  <text x="862" y="414" class="th">Title</text>
+  <text x="1118" y="414" class="th">Status</text>
+  <text x="1198" y="414" class="th">Kind</text>
+
+  <line x1="746" y1="428" x2="1244" y2="428" stroke="#E7EBEF"/>
+  <text x="754" y="452" class="code">sample-project</text>
+  <text x="862" y="452" class="link">Broken command demo</text>
+  <text x="1118" y="452" class="bad" style="font-size:14px;">queued</text>
+  <text x="1198" y="452" class="code">project_command</text>
+
+  <line x1="746" y1="474" x2="1244" y2="474" stroke="#E7EBEF"/>
+  <text x="754" y="498" class="code">-</text>
+  <text x="862" y="498" class="link">Review cross-project inbox rules</text>
+  <text x="1118" y="498" class="ok" style="font-size:14px;">succeeded</text>
+  <text x="1198" y="498" class="code">echo</text>
+
+  <line x1="746" y1="520" x2="1244" y2="520" stroke="#E7EBEF"/>
+  <text x="754" y="544" class="code">sample-project</text>
+  <text x="862" y="544" class="link">Summarize: draft launch checklist</text>
+  <text x="1118" y="544" class="ok" style="font-size:14px;">succeeded</text>
+  <text x="1198" y="544" class="code">echo</text>
+
+  <!-- panels row 2 -->
+  <rect x="132" y="604" width="350" height="246" rx="10" class="panel"/>
+  <text x="156" y="638" class="section-title">Saved Queries</text>
+  <line x1="132" y1="658" x2="482" y2="658" stroke="#D8DEE4"/>
+  <text x="156" y="688" class="th">Scope</text>
+  <text x="226" y="688" class="th">Name</text>
+  <text x="314" y="688" class="th">Filters</text>
+  <line x1="148" y1="702" x2="466" y2="702" stroke="#E7EBEF"/>
+  <text x="156" y="726" class="code">tasks</text>
+  <text x="226" y="726" class="link">Needs Human</text>
+  <text x="314" y="726" class="code">{status: needs_human}</text>
+  <line x1="148" y1="748" x2="466" y2="748" stroke="#E7EBEF"/>
+  <text x="156" y="772" class="code">tasks</text>
+  <text x="226" y="772" class="link">Failed Tasks</text>
+  <text x="314" y="772" class="code">{status: failed}</text>
+
+  <rect x="514" y="604" width="368" height="246" rx="10" class="panel"/>
+  <text x="538" y="638" class="section-title">Pipeline Runs</text>
+  <line x1="514" y1="658" x2="882" y2="658" stroke="#D8DEE4"/>
+  <text x="538" y="688" class="th">Project</text>
+  <text x="662" y="688" class="th">Pipeline</text>
+  <text x="774" y="688" class="th">Progress</text>
+  <text x="538" y="726" class="code">sample-project</text>
+  <text x="662" y="726" class="link">sample-flow</text>
+  <text x="774" y="726" class="td">1 / 2 terminal</text>
+  <text x="538" y="756" class="muted">failed: 1 · blocked: 1</text>
+
+  <rect x="914" y="604" width="346" height="246" rx="10" class="panel"/>
+  <text x="938" y="638" class="section-title">Configuration</text>
+  <line x1="914" y1="658" x2="1260" y2="658" stroke="#D8DEE4"/>
+  <text x="938" y="692" class="th">Data Dir</text>
+  <text x="1034" y="692" class="code">/tmp/agenthub-demo-data</text>
+  <text x="938" y="732" class="th">Projects</text>
+  <text x="1034" y="732" class="code">projects.json</text>
+  <text x="938" y="772" class="th">Database</text>
+  <text x="1034" y="772" class="code">agent_hub.db</text>
+</svg>
