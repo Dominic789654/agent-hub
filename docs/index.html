@@ -364,6 +364,7 @@
           <a href="#surfaces">Surfaces</a>
           <a href="#preview">Preview</a>
           <a href="#use-cases">Use cases</a>
+          <a href="#workflow">Workflow</a>
           <a href="#routing">Routing</a>
           <a href="#architecture">Architecture</a>
           <a href="#demo">Demo</a>
@@ -558,6 +559,47 @@
             <h3>Human-in-the-loop automation</h3>
             <p>Run as much as possible automatically, then stop clearly when a hard case needs manual review.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workflow">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Recommended workflow</h2>
+            <p class="section-intro">
+              The best current usage pattern is to put <code>agent-hub</code> in front of your existing repo-local coding agents instead of trying to replace them.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <span class="kicker">1</span>
+            <h3>Keep one control plane</h3>
+            <p>Run <code>agent-hub</code> as the queue, routing, dependency, and visibility layer that the operator talks to directly.</p>
+          </article>
+          <article class="card">
+            <span class="kicker">2</span>
+            <h3>Keep agents repo-local</h3>
+            <p>Let Claude Code, Codex, Kimi Code, or Qwen Code stay inside the target repo through wrapper scripts or local command entrypoints.</p>
+          </article>
+          <article class="card">
+            <span class="kicker">3</span>
+            <h3>Launch through project routing</h3>
+            <p>Register repo-agent pairs as projects, then create bounded tasks or templates that forward free-form prompts into those local executors.</p>
+          </article>
+        </div>
+
+        <div class="cta" style="margin-top: 1rem;">
+          <h3 style="margin-top: 0;">Bring your own code agent. Use agent-hub as the explicit queue in front of it.</h3>
+          <p class="section-intro" style="max-width: none;">
+            This is the most natural fit for the public MVP: one operator surface, many repos, explicit dependencies, and coding agents launched through controlled local commands.
+          </p>
+          <div class="hero-actions" style="margin-top: 1rem;">
+            <a class="button" href="./agent-driven-usage.md">Read the recommended setup</a>
+          </div>
         </div>
       </div>
     </section>

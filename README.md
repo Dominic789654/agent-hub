@@ -23,6 +23,7 @@ The codebase stays intentionally small and uses the Python standard library only
 - landing page: `docs/index.html`
 - demo guide: `docs/demo.md`
 - demo page: `docs/demo.html`
+- recommended agent workflow: `docs/agent-driven-usage.md`
 - public launch checklist: `docs/public-launch-checklist.md`
 - public release: `https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0`
 - GitHub Pages publish is wired through `.github/workflows/pages.yml`
@@ -42,6 +43,18 @@ Current status: public-safe OSS MVP.
 - add richer screenshots or UI captures for the public site
 - tighten public API framing and compatibility expectations
 - expand executor and policy examples without turning the repo into a heavy platform
+
+## Recommended Usage Pattern
+
+Use `agent-hub` as the control plane, not as a replacement for your coding agent.
+
+- keep `agent-hub` responsible for queueing, routing, dependency handling, and visibility
+- keep repo-local coding agents responsible for actual implementation work
+- register those agents as project-backed local commands, then launch them through `agent-hub`
+
+The current OSS slice is a good fit for workflows where you already use tools like Claude Code, Codex, Kimi Code, or Qwen Code in local repos and want one explicit queue in front of them.
+
+See `docs/agent-driven-usage.md` for the recommended setup pattern.
 
 ## What It Does
 
