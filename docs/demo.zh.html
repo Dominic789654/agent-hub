@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>agent-hub code-assistant board demo</title>
+    <title>agent-hub 代码助手看板演示</title>
     <meta
       name="description"
-      content="Quick local walkthrough for agent-hub as a code-assistant multitask board."
+      content="用中文快速体验 agent-hub 作为代码助手多任务看板的本地演示流程。"
     >
     <style>
       :root {
@@ -156,26 +156,26 @@
         <div class="brand">agent-hub</div>
         <div class="nav-actions">
           <span class="lang-switch">
-            <a class="lang-chip active" href="./demo.html">EN</a>
-            <a class="lang-chip" href="./demo.zh.html">中文</a>
+            <a class="lang-chip" href="./demo.html">EN</a>
+            <a class="lang-chip active" href="./demo.zh.html">中文</a>
           </span>
-          <a class="button" href="./index.html">Back to homepage</a>
+          <a class="button" href="./index.zh.html">返回首页</a>
         </div>
       </div>
     </nav>
 
     <header class="hero">
       <div class="container">
-        <h1>Code-assistant board demo</h1>
+        <h1>代码助手看板演示</h1>
         <p class="lead">
-          This walkthrough shows the intended public usage pattern: run the board in the background, then talk to Codex or Claude Code and let the assistant place and inspect tasks through agent-hub.
+          这个演示展示公开版最推荐的使用方式：后台运行看板，然后和 Codex 或 Claude Code 对话，让助手通过 agent-hub 创建、检查和追踪任务。
         </p>
       </div>
     </header>
 
     <main class="container grid">
       <section class="section card">
-        <h2>1. Install</h2>
+        <h2>1. 安装</h2>
         <pre><code>python -m venv .venv
 source .venv/bin/activate
 pip install -e .[dev]
@@ -183,8 +183,8 @@ bash -n examples/demo-agent-repo/scripts/run_agent_task.sh</code></pre>
       </section>
 
       <section class="section card">
-        <h2>2. Start the web surface</h2>
-        <p>Use the example projects registry that models repo-agent pairs.</p>
+        <h2>2. 启动 Web 服务</h2>
+        <p>使用建模了 repo-agent 组合的示例项目注册表。</p>
         <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json serve --port 8080</code></pre>
         <ul>
           <li><code>http://127.0.0.1:8080/</code></li>
@@ -194,33 +194,33 @@ bash -n examples/demo-agent-repo/scripts/run_agent_task.sh</code></pre>
       </section>
 
       <section class="section card">
-        <h2>3. Start the dispatcher</h2>
+        <h2>3. 启动 Dispatcher</h2>
         <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json dispatch</code></pre>
       </section>
 
       <section class="section card">
-        <h2>4. Open your assistant terminal</h2>
-        <p>Open Codex or Claude Code in another terminal, then ask it to use the board for you.</p>
+        <h2>4. 打开你的助手终端</h2>
+        <p>在另一个终端里打开 Codex 或 Claude Code，然后让它替你使用这个看板。</p>
         <ul>
-          <li><code>Create a Codex task in demo-codex to investigate why the local build script is flaky and summarize the likely root cause.</code></li>
-          <li><code>Create a Claude task in demo-claude to review the proposed fix and call out operator-facing risks.</code></li>
-          <li><code>Queue the review-then-implement pipeline in demo-codex for "Add a dry-run mode to the deployment helper".</code></li>
+          <li><code>在 demo-codex 里创建一个 Codex 任务，排查本地构建脚本为什么不稳定，并总结可能的根因。</code></li>
+          <li><code>在 demo-claude 里创建一个 Claude 任务，review 修复方案并指出对操作者有影响的风险。</code></li>
+          <li><code>在 demo-codex 里为“给部署脚本增加 dry-run 模式”排队 review-then-implement pipeline。</code></li>
         </ul>
-        <p>Under the hood, the assistant will call commands like:</p>
+        <p>底层助手会调用类似下面的命令：</p>
         <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "Investigate why the local build script is flaky and summarize the likely root cause"
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-claude delegate-task --input "Review the proposed fix and call out any operator-facing risks"
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-pipeline demo-codex review-then-implement --input "Add a dry-run mode to the deployment helper"</code></pre>
-        <p>This demo uses wrapper scripts under <code>examples/demo-agent-repo/scripts/</code> as a stand-in for real tools like Claude Code, Codex, Kimi Code, or Qwen Code.</p>
+        <p>这个 demo 使用 <code>examples/demo-agent-repo/scripts/</code> 下的 wrapper 脚本，来模拟 Claude Code、Codex、Kimi Code、Qwen Code 这类真实工具。</p>
       </section>
 
       <section class="section card">
-        <h2>5. Ask the assistant to inspect handoff</h2>
-        <p>You can also ask the assistant to inspect the board and report back.</p>
+        <h2>5. 让助手检查交接状态</h2>
+        <p>你也可以让助手直接检查看板并汇报结果。</p>
         <ul>
-          <li><code>Show me the human inbox and explain which task needs manual routing.</code></li>
-          <li><code>If anything failed, tell me whether I should retry it or mark it for manual review.</code></li>
+          <li><code>给我看看 human inbox，并解释哪个任务需要人工路由。</code></li>
+          <li><code>如果有失败任务，告诉我应该重试还是标记为人工 review。</code></li>
         </ul>
-        <p>Under the hood, those checks map to commands like:</p>
+        <p>底层会映射到类似这些命令：</p>
         <pre><code>TASK_ID=$(python -m agent_hub --projects-file examples/agent-driven-projects.example.json create-task "Manual review: choose agent" --kind noop | python - &lt;&lt;'PY'
 import json,sys
 print(json.load(sys.stdin)["id"])
@@ -233,13 +233,13 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
       </section>
 
       <section class="section card">
-        <h2>6. Ask the assistant for saved views</h2>
-        <p>Once the board has useful slices, the assistant can use saved queries to answer questions like:</p>
+        <h2>6. 让助手使用保存视图</h2>
+        <p>当看板上已经有有价值的筛选视图时，助手就可以用保存查询回答类似这样的问题：</p>
         <ul>
-          <li><code>Show only Codex-owned tasks.</code></li>
-          <li><code>Show only tasks that need manual review.</code></li>
+          <li><code>只显示 Codex 负责的任务。</code></li>
+          <li><code>只显示需要人工 review 的任务。</code></li>
         </ul>
-        <p>The underlying commands look like:</p>
+        <p>底层命令类似：</p>
         <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json create-saved-query tasks "Needs Human" --filter status=needs_human
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json create-saved-query tasks "Codex Tasks" --filter project_id=demo-codex
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-saved-queries
@@ -248,27 +248,27 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
       </section>
 
       <section class="section card">
-        <h2>7. Confirm the board view</h2>
-        <p>At any point, the assistant or operator can inspect the board state directly:</p>
+        <h2>7. 确认看板状态</h2>
+        <p>任何时候，助手或操作者都可以直接检查当前看板状态：</p>
         <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json dashboard
 curl -s http://127.0.0.1:8080/dashboard | sed -n '1,80p'</code></pre>
       </section>
 
       <section class="section card">
-        <h2>Expected result</h2>
+        <h2>预期结果</h2>
         <ul>
-          <li>Multiple assistant-task records move through one queue.</li>
-          <li>Different repo-agent pairs show up as distinct <code>project_id</code>s.</li>
-          <li>A pipeline shows serial assistant work.</li>
-          <li>The human inbox shows ambiguous or manual-review cases.</li>
-          <li>Saved queries slice the board by assistant or handoff state.</li>
+          <li>多个助手任务记录会通过同一个队列流动。</li>
+          <li>不同 repo-agent 组合会表现为不同的 <code>project_id</code>。</li>
+          <li>一个 pipeline 会展示串行的助手工作。</li>
+          <li>human inbox 会显示歧义任务或需要人工 review 的案例。</li>
+          <li>保存视图可以按助手或交接状态切分看板。</li>
         </ul>
-        <p>More importantly, the normal operating mode should feel clear: you talk to Codex or Claude Code, the assistant submits work into agent-hub, and the board becomes the shared visibility layer for many code-assistant tasks.</p>
+        <p>更重要的是，正常使用方式应该很清楚：你和 Codex 或 Claude Code 对话，助手把工作提交进 agent-hub，而这个看板就成为很多代码助手任务共享的可视化层。</p>
       </section>
     </main>
 
     <footer class="footer">
-      <div class="container">agent-hub demo guide · OSS MVP</div>
+      <div class="container">agent-hub 中文演示 · OSS MVP</div>
     </footer>
   </body>
 </html>

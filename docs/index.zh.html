@@ -91,6 +91,28 @@
         color: var(--muted);
       }
 
+      .lang-switch {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        margin-left: 0.25rem;
+        padding: 0.2rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .lang-chip {
+        padding: 0.32rem 0.62rem;
+        border-radius: 999px;
+        color: var(--muted);
+      }
+
+      .lang-chip.active {
+        background: rgba(120, 168, 255, 0.16);
+        color: var(--text);
+      }
+
       .button {
         display: inline-flex;
         align-items: center;
@@ -434,7 +456,10 @@
           <a href="#architecture">架构</a>
           <a href="#demo">Demo</a>
           <a href="#links">链接</a>
-          <a href="./index.html">EN</a>
+          <span class="lang-switch">
+            <a class="lang-chip" href="./index.html">EN</a>
+            <a class="lang-chip active" href="./index.zh.html">中文</a>
+          </span>
         </div>
       </div>
     </nav>
@@ -452,6 +477,7 @@
           <div class="hero-actions">
             <a class="button primary" href="https://github.com/Dominic789654/agent-hub">查看 GitHub</a>
             <a class="button" href="./demo.html">查看演示</a>
+            <a class="button" href="./demo.zh.html">中文 Demo</a>
             <a class="button" href="./index.html">English</a>
             <a class="button" href="https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0">v0.1.0 发布</a>
           </div>
@@ -860,7 +886,8 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
               <h3>想看完整步骤？</h3>
               <p>使用浏览器友好的 demo 页面，查看完整的本地逐步流程。</p>
               <div class="hero-actions" style="margin-top: 1rem;">
-                <a class="button" href="./demo.html">打开 Demo 页面</a>
+                <a class="button" href="./demo.html">英文 Demo</a>
+                <a class="button" href="./demo.zh.html">中文 Demo</a>
               </div>
             </article>
           </div>
@@ -912,8 +939,13 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
           </a>
           <a class="card" href="./demo.html">
             <span class="kicker">文档</span>
-            <h3>Demo 页面</h3>
+            <h3>英文 Demo</h3>
             <p>用浏览器友好的方式逐步体验当前 OSS MVP 的本地流程。</p>
+          </a>
+          <a class="card" href="./demo.zh.html">
+            <span class="kicker">文档</span>
+            <h3>中文 Demo</h3>
+            <p>用中文逐步体验当前 OSS MVP 的本地流程。</p>
           </a>
           <a class="card" href="https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0">
             <span class="kicker">发布</span>
