@@ -152,33 +152,6 @@ Overrides:
 - `AGENT_HUB_DATA_DIR`
 - `AGENT_HUB_PROJECTS_FILE`
 
-## Core Concepts
-
-**Tasks**
-- unit of queued work
-- may target a `project_id`
-- may depend on predecessor task ids
-
-**Project Actions**
-- reusable named command templates under `executor.actions`
-- executed via `project_action` tasks
-
-**Task Templates**
-- reusable intake templates under `executor.task_templates`
-- instantiate a single queued task
-
-**Pipelines**
-- reusable multi-step graphs under `executor.pipelines`
-- instantiate multiple tasks plus dependency edges
-
-**Human Inbox**
-- derived view over `failed`, `blocked`, and `needs_human` tasks
-- enriched with labels and latest note
-
-**Saved Queries**
-- persisted filter presets for `tasks` and `pipeline_runs`
-- can be executed later through CLI or HTTP
-
 ## Common Board Operations
 
 These are the operations your assistant should usually perform on your behalf.
@@ -199,57 +172,14 @@ These are the operations your assistant should usually perform on your behalf.
 
 The CLI remains important, but mostly as the mechanism behind the assistant-facing workflow, not as the primary operator experience.
 
-## HTTP Surface
+## If You Want The Technical Details
 
-**Dashboard / Status**
-- `GET /healthz`
-- `GET /app`
-- `GET /dashboard`
-- `GET /status`
-- `GET /config`
-
-**Projects**
-- `GET /projects`
-- `GET /projects/<project_id>/actions`
-- `GET /projects/<project_id>/task-templates`
-- `GET /projects/<project_id>/pipelines`
-
-**Tasks**
-- `GET /tasks?limit=20&project_id=<id>&status=<status>&kind=<kind>&pipeline_run_id=<id>`
-- `GET /tasks/<task_id>`
-- `GET /tasks/<task_id>/neighbors`
-- `GET /tasks/<task_id>/runs/latest`
-- `POST /tasks`
-- `POST /tasks/<task_id>/retry`
-- `POST /tasks/<task_id>/cancel`
-- `POST /tasks/<task_id>/needs-human`
-- `POST /tasks/<task_id>/notes`
-- `POST /tasks/<task_id>/labels`
-- `POST /tasks/<task_id>/labels/remove`
-
-**Runs / Inbox**
-- `GET /runs?limit=20`
-- `GET /human-inbox?limit=20&project_id=<id>`
-
-**Pipelines**
-- `GET /pipeline-runs?limit=20&project_id=<id>&pipeline_id=<id>`
-- `GET /pipeline-runs/<pipeline_run_id>`
-- `POST /pipelines`
-- `POST /pipeline-runs/<pipeline_run_id>/retry`
-- `POST /pipeline-runs/<pipeline_run_id>/cancel`
-- `POST /pipeline-runs/<pipeline_run_id>/notes`
-- `POST /pipeline-runs/<pipeline_run_id>/labels`
-- `POST /pipeline-runs/<pipeline_run_id>/labels/remove`
-
-**Saved Queries**
-- `GET /saved-queries?limit=20&scope=<tasks|pipeline_runs>`
-- `GET /saved-queries/<query_id>`
-- `GET /saved-queries/<query_id>/apply?limit=20`
-- `POST /saved-queries`
-- `POST /saved-queries/<query_id>/delete`
-
-**Task Template Intake**
-- `POST /task-templates`
+- architecture notes: `docs/architecture.md`
+- assistant-first workflow: `docs/agent-driven-usage.md`
+- runnable board walkthrough: `docs/demo.md`
+- browser-friendly demo: `docs/demo.html`
+- release / launch checklist: `docs/public-launch-checklist.md`
+- public release notes: `docs/release-notes-v0.1.0.md`
 
 ## Example Project Registries
 
@@ -282,26 +212,3 @@ See:
 - no secrets in examples
 - local state stays under ignored paths such as `./.agent-hub/`
 - destructive actions remain explicit
-
-## Repository Layout
-
-```text
-.
-├── docs/
-│   ├── architecture.md
-│   ├── demo.md
-│   ├── handoff-notes.md
-│   ├── license-recommendation.md
-│   ├── oss-repo-prep.md
-│   ├── oss-split-plan.md
-│   ├── release-notes-v0.1.0.md
-│   ├── release-checklist.md
-│   └── safety.md
-├── examples/
-│   ├── env.example
-│   └── projects.example.json
-├── src/
-│   └── agent_hub/
-├── tests/
-└── pyproject.toml
-```
