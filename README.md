@@ -98,29 +98,38 @@ pip install -e .[dev]
 pytest
 ```
 
-## Five-Minute Demo
+## Five-Minute Operator Flow
 
-Terminal A:
+The intended usage is:
+
+- one background terminal for the board
+- one background terminal for the dispatcher
+- one assistant terminal where you talk to Codex or Claude Code
+
+**Background terminal A**
 
 ```bash
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json serve --port 8080
 ```
 
-Terminal B:
+**Background terminal B**
 
 ```bash
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json dispatch
 ```
 
-Terminal C:
+**Assistant terminal**
 
-```bash
-python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "Investigate why the local build script is flaky"
-python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-claude delegate-task --input "Review the proposed fix and summarize risks"
-python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-pipeline demo-codex review-then-implement --input "Add a dry-run mode to the deployment helper"
-python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-human-inbox
-python -m agent_hub --projects-file examples/agent-driven-projects.example.json dashboard
-```
+Open Codex or Claude Code in the environment where you want to operate the board, then ask it to submit tasks for you.
+
+Example prompts:
+
+- `Create a Codex task in demo-codex to investigate why the local build script is flaky.`
+- `Create a Claude task in demo-claude to review the proposed fix and summarize risks.`
+- `If the review is clean, queue the review-then-implement pipeline in demo-codex for "Add a dry-run mode to the deployment helper".`
+- `Show me the current human inbox and tell me if any task needs manual routing.`
+
+That is the primary interaction model. The operator mainly talks to the coding assistant, and the assistant uses `agent-hub` to place and inspect work on the board.
 
 Then open:
 
@@ -128,7 +137,7 @@ Then open:
 - `http://127.0.0.1:8080/app`
 - `http://127.0.0.1:8080/dashboard`
 
-More guided steps live in `docs/demo.md`, and the browser-friendly version lives in `docs/demo.html`. The runnable assistant-board example registry lives at `examples/agent-driven-projects.example.json`.
+If you want the lower-level CLI walkthrough, use `docs/demo.md` or `docs/demo.html`. The runnable assistant-board example registry lives at `examples/agent-driven-projects.example.json`.
 
 ## Default Local State
 
@@ -172,28 +181,23 @@ Overrides:
 
 ## Common Board Operations
 
-These examples use the runnable assistant-board registry at `examples/agent-driven-projects.example.json`.
+These are the operations your assistant should usually perform on your behalf.
 
-**Start The Board**
-- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json serve --port 8080`
-- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json dispatch`
-- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json dashboard`
+**What You Ask The Assistant**
+- `Create a Codex task in demo-codex for this bug report.`
+- `Create a Claude review task for the proposed fix.`
+- `Queue the review-then-implement pipeline in demo-codex.`
+- `Check the human inbox and summarize what needs routing.`
+- `Retry the failed Codex task and tell me what changed.`
 
-**Launch A Codex Task**
-- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "Investigate why the local build script is flaky"`
-
-**Launch A Claude Task**
-- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-claude delegate-task --input "Review the proposed fix and summarize risks"`
-
-**Launch Serial Assistant Work**
-- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-pipeline demo-codex review-then-implement --input "Add a dry-run mode to the deployment helper"`
-
-**Inspect And Triage**
+**What The Assistant Uses Under The Hood**
+- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "..."`
+- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-claude delegate-task --input "..."`
+- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-pipeline demo-codex review-then-implement --input "..."`
 - `python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-human-inbox`
-- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-saved-queries --scope tasks`
-- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json apply-saved-query <query-id>`
 - `python -m agent_hub --projects-file examples/agent-driven-projects.example.json retry-task <task-id>`
-- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json mark-needs-human <task-id> --note "human should choose whether Codex or Claude owns this task"`
+
+The CLI remains important, but mostly as the mechanism behind the assistant-facing workflow, not as the primary operator experience.
 
 ## HTTP Surface
 
