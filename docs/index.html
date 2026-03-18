@@ -272,6 +272,35 @@
         box-shadow: var(--shadow);
       }
 
+      .table-card {
+        overflow: hidden;
+        padding: 0;
+      }
+
+      .cap-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .cap-table th,
+      .cap-table td {
+        padding: 0.95rem 1rem;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .cap-table th {
+        width: 28%;
+        color: var(--text);
+        font-size: 0.96rem;
+      }
+
+      .cap-table td {
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
       .diagram-frame {
         overflow: hidden;
         padding: 0;
@@ -480,6 +509,33 @@
             <p>Keep the repo easy to audit while preserving room to extend executors, policies, and integrations.</p>
           </article>
         </div>
+
+        <article class="card table-card" style="margin-top: 1rem;">
+          <table class="cap-table">
+            <tbody>
+              <tr>
+                <th>Primary role</th>
+                <td>A multitask board for code assistants working across local repositories.</td>
+              </tr>
+              <tr>
+                <th>Main user</th>
+                <td>One operator who wants to supervise many coding tasks through one assistant-facing surface.</td>
+              </tr>
+              <tr>
+                <th>Main targets</th>
+                <td>Repo-local tools such as Codex, Claude Code, Kimi Code, or Qwen Code launched through controlled wrappers.</td>
+              </tr>
+              <tr>
+                <th>Main value</th>
+                <td>Queueing, routing, dependency control, retries, blocked-state visibility, and human handoff.</td>
+              </tr>
+              <tr>
+                <th>Interaction model</th>
+                <td>You mainly talk to your assistant. The assistant places and inspects tasks through the board.</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
       </div>
     </section>
 
