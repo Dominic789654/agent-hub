@@ -17,6 +17,17 @@ This OSS repo is the portable, public-safe slice of the broader idea:
 
 The codebase stays intentionally small and uses the Python standard library only.
 
+## 📊 At A Glance
+
+| Topic | What `agent-hub` does |
+| --- | --- |
+| Primary role | A multitask board for code assistants |
+| Main user | One operator supervising many coding tasks |
+| Main targets | Local repos plus repo-local agents like Codex or Claude Code |
+| Main value | Queueing, routing, dependencies, retries, and human handoff |
+| Primary interaction | Talk to your coding assistant; let it place work on the board |
+| Current scope | Local-first OSS MVP, not a hosted platform |
+
 ## 🌐 Project Site
 
 - live site: `https://dominic789654.github.io/agent-hub/`
@@ -56,6 +67,12 @@ The current OSS slice is a good fit for workflows where you already use tools li
 
 See `docs/agent-driven-usage.md` for the recommended setup pattern.
 
+| Layer | Responsibility |
+| --- | --- |
+| You | Describe what should happen and review outcomes |
+| Codex / Claude Code | Implement or analyze inside the repo |
+| `agent-hub` | Queue work, route it, sequence it, and surface exceptions |
+
 ## 🚫 Not A Traditional Task Board
 
 `agent-hub` is not meant to be a generic to-do tracker for arbitrary operator commands.
@@ -78,6 +95,14 @@ See `docs/agent-driven-usage.md` for the recommended setup pattern.
 - human inbox aggregation for manual triage
 - dashboard JSON and a thin browser app at `/app`
 
+| Capability | Why it matters |
+| --- | --- |
+| Multi-assistant board | See Codex, Claude, and other repo-local agents in one place |
+| Dependency-aware routing | Make serial work wait and let unrelated work run in parallel |
+| Human inbox | Stop hard cases from disappearing inside automation |
+| Saved views | Slice the board by assistant, repo, or handoff state |
+| Thin dashboard | Check current state quickly without opening many terminals |
+
 ## 🧱 What It Is Not
 
 This repo is not yet:
@@ -88,6 +113,12 @@ This repo is not yet:
 - a generic remote executor framework
 
 Treat it as a strong local MVP for code-assistant orchestration, not a finished platform.
+
+| Not the goal | Why |
+| --- | --- |
+| Generic to-do board | The board is centered on code-assistant tasks, not arbitrary tickets |
+| Hosted SaaS | The current value is local-first control and visibility |
+| Assistant replacement | Codex or Claude still do the implementation work |
 
 ## ⚡ Quick Start
 
