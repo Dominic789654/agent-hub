@@ -2,11 +2,13 @@
 
 This guide is for a quick local walkthrough of `agent-hub` as a **code-assistant multitask board**.
 
-The goal is not to demo a generic task queue. The goal is to show the intended public usage pattern:
+The intended usage is:
 
-- one operator surface
-- one explicit task board
-- many repo-local code-assistant entrypoints behind it
+- run the board in the background
+- open Codex or Claude Code in another terminal
+- ask the assistant to place and inspect tasks for you through `agent-hub`
+
+The goal is not to teach operators to type a long sequence of board commands by hand. The goal is to show how the assistant-first workflow is supposed to feel.
 
 ## 1. Install
 
@@ -39,9 +41,19 @@ In a second terminal:
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json dispatch
 ```
 
-## 4. Queue Code-Assistant Work
+## 4. Open Your Assistant Terminal
 
-In a third terminal, route bounded coding requests into repo-local assistant wrappers:
+Open Codex or Claude Code in another terminal in the same environment.
+
+Then ask it to use the board for you.
+
+Example prompts:
+
+- `Create a Codex task in demo-codex to investigate why the local build script is flaky and summarize the likely root cause.`
+- `Create a Claude task in demo-claude to review the proposed fix and call out operator-facing risks.`
+- `Queue the review-then-implement pipeline in demo-codex for "Add a dry-run mode to the deployment helper".`
+
+Under the hood, the assistant will call commands like:
 
 ```bash
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "Investigate why the local build script is flaky and summarize the likely root cause"
@@ -51,7 +63,14 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
 
 This demo uses wrapper scripts under `examples/demo-agent-repo/scripts/` as a stand-in for real tools like Claude Code, Codex, Kimi Code, or Qwen Code.
 
-## 5. Exercise Human Handoff
+## 5. Ask The Assistant To Inspect Handoff
+
+You can also ask the assistant to inspect the board and report back:
+
+- `Show me the human inbox and explain which task needs manual routing.`
+- `If anything failed, tell me whether I should retry it or mark it for manual review.`
+
+Under the hood, those checks map to commands like:
 
 ```bash
 TASK_ID=$(python -m agent_hub --projects-file examples/agent-driven-projects.example.json create-task "Manual review: choose agent" --kind noop | python - <<'PY'
@@ -65,7 +84,14 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-human-inbox
 ```
 
-## 6. Exercise Saved Queries
+## 6. Ask The Assistant For Saved Views
+
+Once the board has useful slices, the assistant can use saved queries to answer questions like:
+
+- `Show only Codex-owned tasks.`
+- `Show only tasks that need manual review.`
+
+The underlying commands look like:
 
 ```bash
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json create-saved-query tasks "Needs Human" --filter status=needs_human
@@ -79,7 +105,9 @@ Use the returned query id:
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json apply-saved-query <query-id>
 ```
 
-## 7. Confirm Dashboard Snapshot
+## 7. Confirm The Board View
+
+At any point, the assistant or operator can inspect the board state directly:
 
 ```bash
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json dashboard
@@ -95,3 +123,9 @@ By the end of the demo you should see:
 - a pipeline showing serial assistant work
 - a populated human inbox for ambiguous or manual-review cases
 - saved queries that slice the board by assistant or handoff state
+
+More importantly, you should be able to imagine the normal operating mode:
+
+- you talk to Codex or Claude Code
+- the assistant submits tasks into `agent-hub`
+- the board becomes the shared visibility layer for many code-assistant tasks

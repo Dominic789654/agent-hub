@@ -118,8 +118,7 @@
       <div class="container">
         <h1>Code-assistant board demo</h1>
         <p class="lead">
-          This walkthrough shows the intended public usage pattern: one operator surface, one explicit task board,
-          and multiple repo-local code-assistant entrypoints behind it.
+          This walkthrough shows the intended public usage pattern: run the board in the background, then talk to Codex or Claude Code and let the assistant place and inspect tasks through agent-hub.
         </p>
       </div>
     </header>
@@ -150,7 +149,14 @@ bash -n examples/demo-agent-repo/scripts/run_agent_task.sh</code></pre>
       </section>
 
       <section class="section card">
-        <h2>4. Queue code-assistant work</h2>
+        <h2>4. Open your assistant terminal</h2>
+        <p>Open Codex or Claude Code in another terminal, then ask it to use the board for you.</p>
+        <ul>
+          <li><code>Create a Codex task in demo-codex to investigate why the local build script is flaky and summarize the likely root cause.</code></li>
+          <li><code>Create a Claude task in demo-claude to review the proposed fix and call out operator-facing risks.</code></li>
+          <li><code>Queue the review-then-implement pipeline in demo-codex for "Add a dry-run mode to the deployment helper".</code></li>
+        </ul>
+        <p>Under the hood, the assistant will call commands like:</p>
         <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "Investigate why the local build script is flaky and summarize the likely root cause"
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-claude delegate-task --input "Review the proposed fix and call out any operator-facing risks"
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-pipeline demo-codex review-then-implement --input "Add a dry-run mode to the deployment helper"</code></pre>
@@ -158,7 +164,13 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
       </section>
 
       <section class="section card">
-        <h2>5. Exercise human handoff</h2>
+        <h2>5. Ask the assistant to inspect handoff</h2>
+        <p>You can also ask the assistant to inspect the board and report back.</p>
+        <ul>
+          <li><code>Show me the human inbox and explain which task needs manual routing.</code></li>
+          <li><code>If anything failed, tell me whether I should retry it or mark it for manual review.</code></li>
+        </ul>
+        <p>Under the hood, those checks map to commands like:</p>
         <pre><code>TASK_ID=$(python -m agent_hub --projects-file examples/agent-driven-projects.example.json create-task "Manual review: choose agent" --kind noop | python - &lt;&lt;'PY'
 import json,sys
 print(json.load(sys.stdin)["id"])
@@ -171,7 +183,13 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
       </section>
 
       <section class="section card">
-        <h2>6. Exercise saved queries</h2>
+        <h2>6. Ask the assistant for saved views</h2>
+        <p>Once the board has useful slices, the assistant can use saved queries to answer questions like:</p>
+        <ul>
+          <li><code>Show only Codex-owned tasks.</code></li>
+          <li><code>Show only tasks that need manual review.</code></li>
+        </ul>
+        <p>The underlying commands look like:</p>
         <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json create-saved-query tasks "Needs Human" --filter status=needs_human
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json create-saved-query tasks "Codex Tasks" --filter project_id=demo-codex
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-saved-queries
@@ -180,7 +198,8 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
       </section>
 
       <section class="section card">
-        <h2>7. Confirm dashboard snapshot</h2>
+        <h2>7. Confirm the board view</h2>
+        <p>At any point, the assistant or operator can inspect the board state directly:</p>
         <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json dashboard
 curl -s http://127.0.0.1:8080/dashboard | sed -n '1,80p'</code></pre>
       </section>
@@ -194,6 +213,7 @@ curl -s http://127.0.0.1:8080/dashboard | sed -n '1,80p'</code></pre>
           <li>The human inbox shows ambiguous or manual-review cases.</li>
           <li>Saved queries slice the board by assistant or handoff state.</li>
         </ul>
+        <p>More importantly, the normal operating mode should feel clear: you talk to Codex or Claude Code, the assistant submits work into agent-hub, and the board becomes the shared visibility layer for many code-assistant tasks.</p>
       </section>
     </main>
 
