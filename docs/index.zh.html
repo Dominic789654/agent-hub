@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>agent-hub — Local-first multitask board for code assistants</title>
+    <title>agent-hub — 面向代码助手的本地优先多任务看板</title>
     <meta
       name="description"
-      content="agent-hub is a local-first multitask board for routing and observing code-assistant work across projects, with SQLite queueing, dependency-aware dispatch, templates, pipelines, human inbox, and a thin dashboard."
+      content="agent-hub 是一个面向代码助手的本地优先多任务看板，用来在多个项目之间做任务排队、路由、依赖调度、人工交接和网页观察。"
     >
     <style>
       :root {
@@ -425,16 +425,16 @@
       <div class="container nav-inner">
         <div class="brand"><span class="brand-mark"></span><span>agent-hub</span></div>
         <div class="nav-links">
-          <a href="#features">Features</a>
-          <a href="#surfaces">Surfaces</a>
-          <a href="#preview">Preview</a>
-          <a href="#use-cases">Use cases</a>
-          <a href="#workflow">Workflow</a>
-          <a href="#routing">Routing</a>
-          <a href="#architecture">Architecture</a>
+          <a href="#features">能力</a>
+          <a href="#surfaces">入口</a>
+          <a href="#preview">预览</a>
+          <a href="#use-cases">场景</a>
+          <a href="#workflow">工作流</a>
+          <a href="#routing">路由</a>
+          <a href="#architecture">架构</a>
           <a href="#demo">Demo</a>
-          <a href="#links">Links</a>
-          <a href="./index.zh.html">中文</a>
+          <a href="#links">链接</a>
+          <a href="./index.html">EN</a>
         </div>
       </div>
     </nav>
@@ -442,61 +442,61 @@
     <header class="hero">
       <div class="container hero-grid">
         <section>
-          <div class="eyebrow">Local-first · SQLite-backed · OSS MVP</div>
-          <h1>One multitask board for your code assistants.</h1>
+          <div class="eyebrow">本地优先 · SQLite 驱动 · OSS MVP</div>
+          <h1>给你的代码助手一个统一的多任务看板。</h1>
           <p class="hero-copy">
-            agent-hub gives a single operator a concrete control surface for multi-project code-assistant workflows:
-            queue coding tasks, route them into repo-local agents, model dependencies, track blocked work and retries,
-            surface human handoff, and inspect the whole system through CLI, HTTP, JSON, and a thin dashboard.
+            `agent-hub` 给单个操作者提供一个清晰的控制面，用来管理跨项目的代码助手工作流：
+            把编码任务排队，路由到各个仓库里的本地助手，表达依赖关系，跟踪阻塞与重试，
+            暴露人工接入点，并通过 CLI、HTTP、JSON 和轻量网页统一观察整个系统。
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="https://github.com/Dominic789654/agent-hub">View on GitHub</a>
-            <a class="button" href="./demo.html">Read demo guide</a>
-            <a class="button" href="./index.zh.html">中文主页</a>
-            <a class="button" href="https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0">v0.1.0 release</a>
+            <a class="button primary" href="https://github.com/Dominic789654/agent-hub">查看 GitHub</a>
+            <a class="button" href="./demo.html">查看演示</a>
+            <a class="button" href="./index.html">English</a>
+            <a class="button" href="https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0">v0.1.0 发布</a>
           </div>
           <div class="meta-row">
-            <span class="pill">Code-assistant queue</span>
-            <span class="pill">Dependency-aware dispatch</span>
-            <span class="pill">Task templates</span>
-            <span class="pill">Pipelines</span>
-            <span class="pill">Human inbox</span>
-            <span class="pill">Thin dashboard</span>
+            <span class="pill">代码助手队列</span>
+            <span class="pill">依赖感知调度</span>
+            <span class="pill">任务模板</span>
+            <span class="pill">流水线</span>
+            <span class="pill">人工接入</span>
+            <span class="pill">轻量看板</span>
           </div>
         </section>
 
         <aside class="panel hero-panel">
           <div class="stack">
             <div>
-              <span class="kicker">Why it exists</span>
-              <h3>Keep assistant coordination small and inspectable.</h3>
+              <span class="kicker">为什么存在</span>
+              <h3>让代码助手协作保持小而清晰、可检查。</h3>
               <p>
-                The project is intentionally narrow: standard-library Python, local state, explicit task records,
-                and clear extension points instead of a generic workflow platform.
+                这个项目故意把边界收得很窄：标准库 Python、本地状态、显式任务记录，
+                再加上清晰的扩展点，而不是一套泛化的大工作流平台。
               </p>
             </div>
 
             <div class="metric-grid">
               <div class="metric">
                 <strong>CLI + HTTP + UI</strong>
-                <span class="section-intro">Operate through scripts, endpoints, or the browser app.</span>
+                <span class="section-intro">可以通过脚本、接口或浏览器应用操作。</span>
               </div>
               <div class="metric">
-                <strong>Projects as routing keys</strong>
-                <span class="section-intro">Point assistant tasks at local repos and reusable command surfaces.</span>
+                <strong>项目作为路由键</strong>
+                <span class="section-intro">把助手任务精确送到本地 repo 和复用命令入口。</span>
               </div>
               <div class="metric">
-                <strong>Human handoff built in</strong>
-                <span class="section-intro">Make ambiguity and failures visible instead of hiding them.</span>
+                <strong>内建人工交接</strong>
+                <span class="section-intro">让歧义和失败可见，而不是被自动化吞掉。</span>
               </div>
               <div class="metric">
-                <strong>Portable by default</strong>
-                <span class="section-intro">Everything runs from local files and a small SQLite database.</span>
+                <strong>默认可迁移</strong>
+                <span class="section-intro">全部依赖本地文件和一个小型 SQLite 数据库。</span>
               </div>
             </div>
 
             <div class="quote">
-              Good code-assistant control planes do not hide work. They make task state, dependencies, retries, and operator intervention explicit.
+              好的代码助手控制面，不会隐藏工作本身。它会把任务状态、依赖、重试和人工介入都显式暴露出来。
             </div>
           </div>
         </aside>
@@ -507,44 +507,43 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Main capabilities</h2>
+            <h2>核心能力</h2>
             <p class="section-intro">
-              The current release focuses on the pieces you need before layering on bigger assistant systems:
-              durable queue state, dependency handling, project routing, and thin operator visibility.
+              当前版本聚焦在真正必要的基础层：可持久化队列状态、依赖处理、项目路由，以及轻量操作者可视化。
             </p>
           </div>
         </div>
 
         <div class="grid grid-3">
           <article class="card">
-            <span class="kicker">Queue core</span>
-            <h3>Durable assistant task lifecycle</h3>
-            <p>SQLite-backed assistant tasks, dependency edges, retries, cancellation, blocked-state propagation, and run history.</p>
+            <span class="kicker">队列核心</span>
+            <h3>可持久化的助手任务生命周期</h3>
+            <p>基于 SQLite 保存助手任务、依赖边、重试、取消、阻塞传播和运行历史。</p>
           </article>
           <article class="card">
-            <span class="kicker">Project routing</span>
-            <h3>Actions, templates, and pipelines</h3>
-            <p>Route coding work into reusable project-backed agent commands and instantiate bounded multi-step flows.</p>
+            <span class="kicker">项目路由</span>
+            <h3>动作、模板与流水线</h3>
+            <p>把编码工作路由到可复用的项目级助手命令，并实例化有边界的多步流程。</p>
           </article>
           <article class="card">
-            <span class="kicker">Operator visibility</span>
-            <h3>Inspect through multiple surfaces</h3>
-            <p>Use CLI commands, JSON endpoints, a minimal HTML page, and the thin browser app at <code>/app</code>.</p>
+            <span class="kicker">可观察性</span>
+            <h3>从多个入口统一检查</h3>
+            <p>可以通过 CLI、JSON 接口、静态 HTML 页面和 <code>/app</code> 浏览器应用来观察系统。</p>
           </article>
           <article class="card">
-            <span class="kicker">Handoff policy</span>
-            <h3>Make human intervention first-class</h3>
-            <p>Surface <code>needs_human</code>, notes, and labels so unresolved work does not disappear inside automation.</p>
+            <span class="kicker">交接策略</span>
+            <h3>把人工介入作为一等能力</h3>
+            <p>显式暴露 <code>needs_human</code>、备注和标签，避免未解决问题消失在自动化里。</p>
           </article>
           <article class="card">
-            <span class="kicker">Saved views</span>
-            <h3>Persist and re-run filtered views</h3>
-            <p>Create saved queries for tasks and pipeline runs, then execute them later from CLI or HTTP.</p>
+            <span class="kicker">保存视图</span>
+            <h3>持久化并复用筛选结果</h3>
+            <p>可以把任务或流水线筛选条件保存下来，之后从 CLI 或 HTTP 反复执行。</p>
           </article>
           <article class="card">
-            <span class="kicker">Public-safe baseline</span>
-            <h3>Small codebase, real extension points</h3>
-            <p>Keep the repo easy to audit while preserving room to extend executors, policies, and integrations.</p>
+            <span class="kicker">公开化基线</span>
+            <h3>代码库够小，但扩展点真实可用</h3>
+            <p>保持仓库易于审计，同时给执行器、策略和集成预留清晰扩展空间。</p>
           </article>
         </div>
 
@@ -552,24 +551,24 @@
           <table class="cap-table">
             <tbody>
               <tr>
-                <th>Primary role</th>
-                <td>A multitask board for code assistants working across local repositories.</td>
+                <th>核心定位</th>
+                <td>一个给代码助手使用的多任务看板，面向多个本地仓库工作。</td>
               </tr>
               <tr>
-                <th>Main user</th>
-                <td>One operator who wants to supervise many coding tasks through one assistant-facing surface.</td>
+                <th>主要用户</th>
+                <td>一个希望通过单一助手入口管理多个编码任务的操作者。</td>
               </tr>
               <tr>
-                <th>Main targets</th>
-                <td>Repo-local tools such as Codex, Claude Code, Kimi Code, or Qwen Code launched through controlled wrappers.</td>
+                <th>主要目标</th>
+                <td>通过受控 wrapper 启动的仓库内工具，例如 Codex、Claude Code、Kimi Code、Qwen Code。</td>
               </tr>
               <tr>
-                <th>Main value</th>
-                <td>Queueing, routing, dependency control, retries, blocked-state visibility, and human handoff.</td>
+                <th>主要价值</th>
+                <td>任务排队、路由、依赖控制、重试、阻塞可视化，以及人工交接。</td>
               </tr>
               <tr>
-                <th>Interaction model</th>
-                <td>You mainly talk to your assistant. The assistant places and inspects tasks through the board.</td>
+                <th>交互方式</th>
+                <td>你主要和代码助手对话，助手再通过这个看板创建和检查任务。</td>
               </tr>
             </tbody>
           </table>
@@ -581,9 +580,9 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Three operator surfaces</h2>
+            <h2>三个操作者入口</h2>
             <p class="section-intro">
-              The same system is available through scripts, HTTP, and a thin browser UI. Use the surface that matches the job without changing the underlying queue model.
+              同一套系统可通过脚本、HTTP 和轻量浏览器界面访问。你可以按任务选择入口，而不必改变底层队列模型。
             </p>
           </div>
         </div>
@@ -591,18 +590,18 @@
         <div class="grid grid-3">
           <article class="card">
             <span class="kicker">CLI</span>
-            <h3>Automation-friendly commands</h3>
-            <p>Create tasks, run templates, dispatch queues, inspect inbox state, and export snapshots from scripts or shells.</p>
+            <h3>适合自动化的命令入口</h3>
+            <p>可以从脚本或 shell 中创建任务、运行模板、调度队列、查看 inbox 状态和导出快照。</p>
           </article>
           <article class="card">
             <span class="kicker">HTTP</span>
-            <h3>Composable control endpoints</h3>
-            <p>Drive task creation, querying, inbox views, pipeline runs, and dashboard snapshots through a small JSON surface.</p>
+            <h3>可组合的控制接口</h3>
+            <p>通过轻量 JSON 接口完成任务创建、查询、inbox 查看、pipeline 运行和 dashboard 快照。</p>
           </article>
           <article class="card">
             <span class="kicker">Browser UI</span>
-            <h3>Thin inspection surface</h3>
-            <p>Use the HTML page and browser app for lightweight triage, visibility, and manual intervention without heavy frontend machinery.</p>
+            <h3>轻量观察界面</h3>
+            <p>使用 HTML 页面和浏览器应用进行轻量分诊、状态观察和人工介入，而不需要重型前端。</p>
           </article>
         </div>
       </div>
@@ -612,9 +611,9 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Dashboard preview</h2>
+            <h2>Dashboard 预览</h2>
             <p class="section-intro">
-              A high-fidelity preview based on the real <code>/app</code> layout, populated with representative queue, inbox, pipeline, and saved-query data.
+              基于真实 <code>/app</code> 布局做的高保真静态预览，填充了代表性的队列、inbox、pipeline 和保存视图数据。
             </p>
           </div>
         </div>
@@ -622,9 +621,9 @@
         <div class="terminal diagram-frame">
           <div class="terminal-bar">
             <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            <span style="margin-left: 0.35rem; color: var(--muted);">dashboard preview</span>
+            <span style="margin-left: 0.35rem; color: var(--muted);">dashboard 预览</span>
           </div>
-          <img src="./assets/dashboard-preview.svg" alt="Agent Hub dashboard preview based on the browser app layout">
+          <img src="./assets/dashboard-preview.svg" alt="基于浏览器应用布局的 Agent Hub dashboard 预览">
         </div>
       </div>
     </section>
@@ -633,25 +632,25 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Where it fits</h2>
+            <h2>适合什么场景</h2>
             <p class="section-intro">
-              agent-hub works best when one operator needs one control surface for many local repos and bounded code-assistant tasks.
+              当一个操作者需要用一个控制面同时管理多个本地 repo 和有边界的代码助手任务时，`agent-hub` 最合适。
             </p>
           </div>
         </div>
 
         <div class="grid grid-3">
           <article class="card">
-            <h3>Cross-repo assistant routing</h3>
-            <p>Accept natural-language intent, map it to a target project, and launch a bounded assistant task with explicit deliverables.</p>
+            <h3>跨仓库助手路由</h3>
+            <p>接受自然语言意图，映射到目标项目，并启动一个带明确交付物的有边界助手任务。</p>
           </article>
           <article class="card">
-            <h3>Serial and parallel workflows</h3>
-            <p>Model dependencies when one task must wait, while still allowing unrelated work to run in parallel.</p>
+            <h3>串行与并行工作流</h3>
+            <p>当某项任务必须等待时显式建模依赖，同时允许无关工作并行执行。</p>
           </article>
           <article class="card">
-            <h3>Human-in-the-loop coding</h3>
-            <p>Run as much as possible automatically, then stop clearly when a hard case needs manual review.</p>
+            <h3>人机协同编码</h3>
+            <p>能自动跑的尽量自动跑，遇到棘手案例时清楚停下并进入人工审查。</p>
           </article>
         </div>
       </div>
@@ -660,23 +659,23 @@
     <section class="section">
       <div class="container compare">
         <article class="card">
-          <span class="kicker">This is</span>
-          <h3>A multitask board for code assistants</h3>
+          <span class="kicker">这是什么</span>
+          <h3>一个给代码助手用的多任务看板</h3>
           <ul class="list">
-            <li>Queue bounded coding tasks for repo-local agents</li>
-            <li>Route work across multiple repos and agent entrypoints</li>
-            <li>Track dependency order, retries, blocked work, and handoff</li>
-            <li>Supervise assistant execution through one operator surface</li>
+            <li>为仓库内助手排队有边界的编码任务</li>
+            <li>在多个 repo 和多个助手入口之间做路由</li>
+            <li>跟踪依赖顺序、重试、阻塞和交接</li>
+            <li>通过单一操作者界面监督助手执行</li>
           </ul>
         </article>
         <article class="card">
-          <span class="kicker">This is not</span>
-          <h3>A traditional command or to-do board</h3>
+          <span class="kicker">这不是什么</span>
+          <h3>不是传统命令面板或待办系统</h3>
           <ul class="list">
-            <li>Not a generic ticket tracker for arbitrary operator commands</li>
-            <li>Not a replacement for Claude Code, Codex, Kimi Code, or Qwen Code</li>
-            <li>Not a hosted PM system or multi-tenant workflow SaaS</li>
-            <li>Not a generic orchestration engine before the coding use case is clear</li>
+            <li>不是任意操作者命令的通用工单系统</li>
+            <li>不是 Claude Code、Codex、Kimi Code、Qwen Code 的替代品</li>
+            <li>不是托管式 PM 系统或多租户 SaaS</li>
+            <li>不是在编码场景未明确前就抽象出来的泛化编排引擎</li>
           </ul>
         </article>
       </div>
@@ -686,9 +685,9 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Recommended workflow</h2>
+            <h2>推荐工作流</h2>
             <p class="section-intro">
-              The best current usage pattern is to use <code>agent-hub</code> as a multitask board in front of your existing repo-local coding agents instead of trying to replace them.
+              当前最自然的使用方式，是把 <code>agent-hub</code> 放在你已有的仓库内代码助手前面，作为多任务看板，而不是试图替代它们。
             </p>
           </div>
         </div>
@@ -696,28 +695,28 @@
         <div class="grid grid-3">
           <article class="card">
             <span class="kicker">1</span>
-            <h3>Keep one multitask board</h3>
-            <p>Run <code>agent-hub</code> as the queue, routing, dependency, and visibility layer that the operator talks to directly.</p>
+            <h3>维护一个统一看板</h3>
+            <p>把 <code>agent-hub</code> 作为队列、路由、依赖和可视化层，让操作者直接面向它工作。</p>
           </article>
           <article class="card">
             <span class="kicker">2</span>
-            <h3>Keep agents repo-local</h3>
-            <p>Let Claude Code, Codex, Kimi Code, or Qwen Code stay inside the target repo through wrapper scripts or local command entrypoints.</p>
+            <h3>让助手留在 repo 内</h3>
+            <p>让 Claude Code、Codex、Kimi Code、Qwen Code 继续待在目标 repo 中，通过 wrapper 或本地命令入口运行。</p>
           </article>
           <article class="card">
             <span class="kicker">3</span>
-            <h3>Launch through project routing</h3>
-            <p>Register repo-agent pairs as projects, then create bounded tasks or templates that forward free-form prompts into those local executors.</p>
+            <h3>通过项目路由发起任务</h3>
+            <p>把 repo-助手组合注册成项目，再创建任务或模板，把自然语言提示词转发到这些本地执行器。</p>
           </article>
         </div>
 
         <div class="cta" style="margin-top: 1rem;">
-          <h3 style="margin-top: 0;">Bring your own code agent. Use agent-hub as the multitask board in front of it.</h3>
+          <h3 style="margin-top: 0;">保留你现有的代码助手，把 agent-hub 放在前面当多任务看板。</h3>
           <p class="section-intro" style="max-width: none;">
-            This is the most natural fit for the public MVP: one operator surface, many repos, explicit dependencies, and coding agents launched through controlled local commands.
+            这就是当前公开版 MVP 最自然的定位：一个操作者入口、多个本地 repo、显式依赖，以及通过受控本地命令启动的代码助手。
           </p>
           <div class="hero-actions" style="margin-top: 1rem;">
-            <a class="button" href="./agent-driven-usage.md">Read the recommended setup</a>
+            <a class="button" href="./agent-driven-usage.md">查看推荐接入方式</a>
           </div>
         </div>
       </div>
@@ -727,9 +726,9 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>How one request becomes many bounded tasks</h2>
+            <h2>一个需求如何变成多个有边界任务</h2>
             <p class="section-intro">
-              The control-plane value is not just execution. It is the normalization step: convert a vague coding request into explicit project targets, bounded assistant tasks, and dependency-aware scheduling.
+              控制面的价值不只是执行，更在于“归一化”这一步：把模糊的编码需求转成明确项目目标、有边界的助手任务，以及依赖感知调度。
             </p>
           </div>
         </div>
@@ -737,9 +736,9 @@
         <div class="terminal diagram-frame">
           <div class="terminal-bar">
             <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            <span style="margin-left: 0.35rem; color: var(--muted);">routing flow</span>
+            <span style="margin-left: 0.35rem; color: var(--muted);">路由流程</span>
           </div>
-          <img src="./assets/routing-flow.svg" alt="Natural language request to multi-project routing flow">
+          <img src="./assets/routing-flow.svg" alt="从自然语言需求到多项目路由的流程图">
         </div>
       </div>
     </section>
@@ -748,9 +747,9 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Architecture</h2>
+            <h2>架构</h2>
             <p class="section-intro">
-              The implementation is deliberately plain: small modules, explicit storage, and a dependency graph you can reason about.
+              实现刻意保持朴素：小模块、显式存储，以及可推理的依赖图。
             </p>
           </div>
         </div>
@@ -759,25 +758,25 @@
           <div class="terminal diagram-frame">
             <div class="terminal-bar">
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span style="margin-left: 0.35rem; color: var(--muted);">static architecture diagram</span>
+              <span style="margin-left: 0.35rem; color: var(--muted);">静态架构图</span>
             </div>
-            <img src="./assets/architecture-overview.svg" alt="Agent Hub architecture overview diagram">
+            <img src="./assets/architecture-overview.svg" alt="Agent Hub 架构总览图">
           </div>
 
           <article class="card">
-            <span class="kicker">Implemented slice</span>
-            <h3>Core modules</h3>
+            <span class="kicker">当前实现</span>
+            <h3>核心模块</h3>
             <ul class="feature-list">
-              <li><code>db.py</code> bootstraps local SQLite state</li>
-              <li><code>repository.py</code> manages lifecycle, edges, and block propagation</li>
-              <li><code>dispatcher.py</code> claims and executes ready tasks</li>
-              <li><code>web.py</code> exposes health, status, task, inbox, and dashboard surfaces</li>
-              <li><code>services/executors.py</code> routes project-backed commands</li>
-              <li><code>services/pipelines.py</code> expands pipeline templates into task graphs</li>
+              <li><code>db.py</code> 初始化本地 SQLite 状态</li>
+              <li><code>repository.py</code> 管理生命周期、依赖边和阻塞传播</li>
+              <li><code>dispatcher.py</code> 领取并执行 ready 任务</li>
+              <li><code>web.py</code> 提供 health、status、task、inbox、dashboard 等接口</li>
+              <li><code>services/executors.py</code> 负责项目级命令路由</li>
+              <li><code>services/pipelines.py</code> 把 pipeline 模板展开成任务图</li>
             </ul>
             <div class="hero-actions" style="margin-top: 1rem;">
-              <a class="button" href="./assets/architecture-overview.svg">Open SVG</a>
-              <a class="button" href="./architecture.md">Read architecture notes</a>
+              <a class="button" href="./assets/architecture-overview.svg">打开 SVG</a>
+              <a class="button" href="./architecture.md">查看架构说明</a>
             </div>
           </article>
         </div>
@@ -788,9 +787,9 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>How work moves</h2>
+            <h2>任务如何流动</h2>
             <p class="section-intro">
-              The system keeps the workflow small: define work, dispatch only ready tasks, and surface exceptions for operator action.
+              系统刻意把流程做小：定义任务、只调度 ready 任务、再把异常显式抛给操作者处理。
             </p>
           </div>
         </div>
@@ -798,27 +797,27 @@
         <div class="grid grid-3">
           <article class="card">
             <span class="kicker">1</span>
-            <h3>Define work</h3>
-            <p>Queue a direct task or instantiate a reusable task template or pipeline from the project registry.</p>
+            <h3>定义任务</h3>
+            <p>直接排队一个任务，或从项目注册表中实例化任务模板与 pipeline。</p>
           </article>
           <article class="card">
             <span class="kicker">2</span>
-            <h3>Dispatch safely</h3>
-            <p>The dispatcher claims only ready tasks and respects dependency completion rules before execution.</p>
+            <h3>安全调度</h3>
+            <p>dispatcher 只领取 ready 任务，并在执行前严格检查依赖完成情况。</p>
           </article>
           <article class="card">
             <span class="kicker">3</span>
-            <h3>Observe and intervene</h3>
-            <p>Inspect snapshots, labels, notes, and the human inbox to retry, cancel, or hand work back to a person.</p>
+            <h3>观察并介入</h3>
+            <p>通过快照、标签、备注和 human inbox 来重试、取消或把工作交还给人。</p>
           </article>
         </div>
 
         <div class="terminal diagram-frame" style="margin-top: 1rem;">
           <div class="terminal-bar">
             <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            <span style="margin-left: 0.35rem; color: var(--muted);">task lifecycle</span>
+            <span style="margin-left: 0.35rem; color: var(--muted);">任务生命周期</span>
           </div>
-          <img src="./assets/task-lifecycle.svg" alt="Agent Hub task lifecycle and human handoff diagram">
+          <img src="./assets/task-lifecycle.svg" alt="Agent Hub 任务生命周期和人工交接图">
         </div>
       </div>
     </section>
@@ -827,9 +826,9 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Fastest way to try it</h2>
+            <h2>最快体验方式</h2>
             <p class="section-intro">
-              Start the web surface, run the dispatcher, queue assistant work through repo-local wrappers, then open the dashboard and browser app.
+              启动网页服务，运行 dispatcher，通过仓库内 wrapper 排队助手任务，然后打开 dashboard 和浏览器应用。
             </p>
           </div>
         </div>
@@ -838,7 +837,7 @@
           <div class="terminal">
             <div class="terminal-bar">
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span style="margin-left: 0.35rem; color: var(--muted);">demo commands</span>
+              <span style="margin-left: 0.35rem; color: var(--muted);">演示命令</span>
             </div>
             <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json serve --port 8080
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json dispatch
@@ -850,18 +849,18 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
 
           <div class="stack">
             <article class="card">
-              <h3>What you will see</h3>
-              <p>A board that routes bounded assistant tasks into repo-local wrappers, plus a human inbox, saved queries, and a read-only dashboard snapshot.</p>
+              <h3>你会看到什么</h3>
+              <p>一个把有边界助手任务路由到仓库内 wrapper 的看板，以及 human inbox、保存视图和只读 dashboard 快照。</p>
             </article>
             <article class="card">
-              <h3>What it is not trying to be</h3>
-              <p>Not a hosted SaaS, not a multi-tenant engine, and not a polished production UI. The point is a small, extensible OSS baseline.</p>
+              <h3>它不打算成为什么</h3>
+              <p>不是托管 SaaS，不是多租户引擎，也不是精修过的生产级 UI。它的目标是一个小而可扩展的 OSS 基线。</p>
             </article>
             <article class="card">
-              <h3>Want the exact walkthrough?</h3>
-              <p>Use the browser-friendly demo page for the full step-by-step local flow.</p>
+              <h3>想看完整步骤？</h3>
+              <p>使用浏览器友好的 demo 页面，查看完整的本地逐步流程。</p>
               <div class="hero-actions" style="margin-top: 1rem;">
-                <a class="button" href="./demo.html">Open demo page</a>
+                <a class="button" href="./demo.html">打开 Demo 页面</a>
               </div>
             </article>
           </div>
@@ -872,23 +871,23 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
     <section class="section">
       <div class="container compare">
         <article class="card">
-          <span class="kicker">Built for</span>
-          <h3>Clear local orchestration</h3>
+          <span class="kicker">适合</span>
+          <h3>清晰的本地编排</h3>
           <ul class="list">
-            <li>Single-operator or small-team local control planes</li>
-            <li>Explicit routing into many local repositories</li>
-            <li>Bounded agent tasks with visible retries and failures</li>
-            <li>Portable workflows that stay inspectable on disk</li>
+            <li>单操作者或小团队的本地控制面</li>
+            <li>显式路由到多个本地仓库</li>
+            <li>有边界且重试/失败可见的助手任务</li>
+            <li>保留在磁盘上、可检查、可迁移的工作流</li>
           </ul>
         </article>
         <article class="card">
-          <span class="kicker">Not for</span>
-          <h3>Heavy hosted workflow assumptions</h3>
+          <span class="kicker">不适合</span>
+          <h3>重型托管工作流假设</h3>
           <ul class="list">
-            <li>Multi-tenant SaaS control planes</li>
-            <li>Opaque remote execution platforms</li>
-            <li>Auth-heavy production service boundaries</li>
-            <li>Enterprise orchestration before core workflow clarity</li>
+            <li>多租户 SaaS 控制面</li>
+            <li>黑盒式远程执行平台</li>
+            <li>认证边界复杂的生产服务</li>
+            <li>在核心工作流未澄清前就做企业级大编排</li>
           </ul>
         </article>
       </div>
@@ -898,42 +897,42 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Project links</h2>
+            <h2>项目链接</h2>
             <p class="section-intro">
-              Start with the repo, then use the release and demo pages to understand the current MVP slice.
+              先看仓库，再看发布页和 demo 页面，就能理解当前这个 MVP 的边界。
             </p>
           </div>
         </div>
 
         <div class="grid grid-3">
           <a class="card" href="https://github.com/Dominic789654/agent-hub">
-            <span class="kicker">Code</span>
-            <h3>Repository</h3>
-            <p>Browse source, tests, templates, docs, and governance files.</p>
+            <span class="kicker">代码</span>
+            <h3>仓库</h3>
+            <p>查看源码、测试、模板、文档和治理文件。</p>
           </a>
           <a class="card" href="./demo.html">
-            <span class="kicker">Docs</span>
-            <h3>Demo page</h3>
-            <p>Step through the browser-friendly local walkthrough for the current OSS MVP.</p>
+            <span class="kicker">文档</span>
+            <h3>Demo 页面</h3>
+            <p>用浏览器友好的方式逐步体验当前 OSS MVP 的本地流程。</p>
           </a>
           <a class="card" href="https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0">
-            <span class="kicker">Release</span>
+            <span class="kicker">发布</span>
             <h3>v0.1.0</h3>
-            <p>Review the first public release and the current baseline scope.</p>
+            <p>查看首个公开版本以及当前基线范围。</p>
           </a>
         </div>
 
         <div class="cta" style="margin-top: 1rem;">
-          <h3 style="margin-top: 0;">Start with a small assistant board, not a giant platform.</h3>
+          <h3 style="margin-top: 0;">先从一个小而清晰的助手看板开始，而不是一整套大平台。</h3>
           <p class="section-intro" style="max-width: none; margin-bottom: 0;">
-            agent-hub is useful when you want explicit code-assistant routing and operator visibility today, while leaving room to grow into stricter policies and richer integrations later.
+            当你今天就想要显式的代码助手路由和操作者可视化，同时又希望后面还能逐步长成更严格策略与更丰富集成时，`agent-hub` 就有价值。
           </p>
         </div>
       </div>
     </section>
 
     <footer class="footer">
-      <div class="container">agent-hub · local-first agent task hub · Apache-2.0</div>
+      <div class="container">agent-hub · 本地优先代码助手任务中枢 · Apache-2.0</div>
     </footer>
   </body>
 </html>
