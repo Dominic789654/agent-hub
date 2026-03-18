@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "projects": [
+    {
+      "id": "demo-codex",
+      "name": "Demo Repo via Codex-style Wrapper",
+      "path": "./demo-agent-repo",
+      "description": "Example repo-agent pair that shows how to route bounded code-assistant tasks through a local wrapper script.",
+      "tags": ["demo", "codex", "agent-board"],
+      "executor": {
+        "type": "local-command",
+        "command": ["bash", "-lc", "./scripts/run_agent_task.sh codex '{task_id}' '{payload}'"],
+        "actions": {
+          "agent-health": {
+            "name": "Agent Health",
+            "description": "Check that the repo-local agent wrapper is callable.",
+            "command": ["bash", "-lc", "./scripts/run_agent_task.sh codex health-check 'show current wrapper status'"]
+          }
+        },
+        "task_templates": {
+          "delegate-task": {
+            "name": "Delegate Task",
+            "description": "Send a bounded implementation request into the repo-local Codex-style wrapper.",
+            "title": "Codex task: {input}",
+            "kind": "project_command",
+            "payload": "{input}",
+            "labels": ["agent", "codex"]
+          }
+        },
+        "pipelines": {
+          "review-then-implement": {
+            "name": "Review Then Implement",
+            "description": "Example serial flow for an assistant board: ask for a plan, then apply the change.",
+            "steps": [
+              {
+                "id": "review",
+                "title": "Review request and propose plan",
+                "kind": "project_command",
+                "payload": "Review this coding request and propose a bounded plan: {input}"
+              },
+              {
+                "id": "implement",
+                "title": "Implement reviewed change",
+                "kind": "project_command",
+                "payload": "Implement the approved plan for: {input}",
+                "depends_on": ["review"]
+              }
+            ]
+          }
+        }
+      },
+      "enabled": true
+    },
+    {
+      "id": "demo-claude",
+      "name": "Demo Repo via Claude-style Wrapper",
+      "path": "./demo-agent-repo",
+      "description": "Example repo-agent pair for a second assistant on the same repo.",
+      "tags": ["demo", "claude", "agent-board"],
+      "executor": {
+        "type": "local-command",
+        "command": ["bash", "-lc", "./scripts/run_agent_task.sh claude '{task_id}' '{payload}'"],
+        "task_templates": {
+          "delegate-task": {
+            "name": "Delegate Task",
+            "description": "Send a bounded implementation request into the repo-local Claude-style wrapper.",
+            "title": "Claude task: {input}",
+            "kind": "project_command",
+            "payload": "{input}",
+            "labels": ["agent", "claude"]
+          }
+        }
+      },
+      "enabled": true
+    }
+  ]
+}

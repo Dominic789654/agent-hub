@@ -735,7 +735,7 @@
           <div>
             <h2>Fastest way to try it</h2>
             <p class="section-intro">
-              Start the web surface, run the dispatcher, queue example assistant work, then open the dashboard and browser app.
+              Start the web surface, run the dispatcher, queue assistant work through repo-local wrappers, then open the dashboard and browser app.
             </p>
           </div>
         </div>
@@ -746,18 +746,18 @@
               <span class="dot"></span><span class="dot"></span><span class="dot"></span>
               <span style="margin-left: 0.35rem; color: var(--muted);">demo commands</span>
             </div>
-            <pre><code>python -m agent_hub serve --port 8080
-python -m agent_hub dispatch
-python -m agent_hub run-task-template sample-project summarize-input --input "review this idea"
-python -m agent_hub run-pipeline sample-project sample-flow --input "demo"
-python -m agent_hub list-human-inbox
-python -m agent_hub dashboard</code></pre>
+            <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json serve --port 8080
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json dispatch
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "Investigate why the local build script is flaky"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-pipeline demo-codex review-then-implement --input "Add a dry-run mode"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-human-inbox
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json dashboard</code></pre>
           </div>
 
           <div class="stack">
             <article class="card">
               <h3>What you will see</h3>
-              <p>A queue that processes assistant tasks and pipelines, a human inbox for triage, saved queries, and a read-only dashboard snapshot.</p>
+              <p>A board that routes bounded assistant tasks into repo-local wrappers, plus a human inbox, saved queries, and a read-only dashboard snapshot.</p>
             </article>
             <article class="card">
               <h3>What it is not trying to be</h3>

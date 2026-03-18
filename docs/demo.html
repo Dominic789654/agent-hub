@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>agent-hub demo guide</title>
+    <title>agent-hub code-assistant board demo</title>
     <meta
       name="description"
-      content="Quick local walkthrough for the agent-hub OSS MVP."
+      content="Quick local walkthrough for agent-hub as a code-assistant multitask board."
     >
     <style>
       :root {
@@ -116,10 +116,10 @@
 
     <header class="hero">
       <div class="container">
-        <h1>Demo guide</h1>
+        <h1>Code-assistant board demo</h1>
         <p class="lead">
-          This is the fastest local walkthrough for the current OSS MVP. Start the web surface,
-          run the dispatcher, queue a small amount of sample work, and inspect the dashboard.
+          This walkthrough shows the intended public usage pattern: one operator surface, one explicit task board,
+          and multiple repo-local code-assistant entrypoints behind it.
         </p>
       </div>
     </header>
@@ -129,12 +129,14 @@
         <h2>1. Install</h2>
         <pre><code>python -m venv .venv
 source .venv/bin/activate
-pip install -e .[dev]</code></pre>
+pip install -e .[dev]
+bash -n examples/demo-agent-repo/scripts/run_agent_task.sh</code></pre>
       </section>
 
       <section class="section card">
         <h2>2. Start the web surface</h2>
-        <pre><code>python -m agent_hub serve --port 8080</code></pre>
+        <p>Use the example projects registry that models repo-agent pairs.</p>
+        <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json serve --port 8080</code></pre>
         <ul>
           <li><code>http://127.0.0.1:8080/</code></li>
           <li><code>http://127.0.0.1:8080/app</code></li>
@@ -144,50 +146,53 @@ pip install -e .[dev]</code></pre>
 
       <section class="section card">
         <h2>3. Start the dispatcher</h2>
-        <pre><code>python -m agent_hub dispatch</code></pre>
+        <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json dispatch</code></pre>
       </section>
 
       <section class="section card">
-        <h2>4. Queue example work</h2>
-        <pre><code>python -m agent_hub create-task "hello world" --kind echo --payload "hi"
-python -m agent_hub run-task-template sample-project summarize-input --input "review this operator note"
-python -m agent_hub run-pipeline sample-project sample-flow --input "demo"</code></pre>
+        <h2>4. Queue code-assistant work</h2>
+        <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "Investigate why the local build script is flaky and summarize the likely root cause"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-claude delegate-task --input "Review the proposed fix and call out any operator-facing risks"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-pipeline demo-codex review-then-implement --input "Add a dry-run mode to the deployment helper"</code></pre>
+        <p>This demo uses wrapper scripts under <code>examples/demo-agent-repo/scripts/</code> as a stand-in for real tools like Claude Code, Codex, Kimi Code, or Qwen Code.</p>
       </section>
 
       <section class="section card">
         <h2>5. Exercise human handoff</h2>
-        <pre><code>TASK_ID=$(python -m agent_hub create-task "manual review" --kind noop | python - &lt;&lt;'PY'
+        <pre><code>TASK_ID=$(python -m agent_hub --projects-file examples/agent-driven-projects.example.json create-task "Manual review: choose agent" --kind noop | python - &lt;&lt;'PY'
 import json,sys
 print(json.load(sys.stdin)["id"])
 PY
 )
-python -m agent_hub mark-needs-human "$TASK_ID" --note "manual review required"
-python -m agent_hub add-task-label "$TASK_ID" priority
-python -m agent_hub add-task-note "$TASK_ID" "operator should inspect context"
-python -m agent_hub list-human-inbox</code></pre>
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json mark-needs-human "$TASK_ID" --note "operator must decide whether Codex or Claude should own this task"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json add-task-label "$TASK_ID" routing
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json add-task-note "$TASK_ID" "ambiguous ownership; human should choose executor"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-human-inbox</code></pre>
       </section>
 
       <section class="section card">
         <h2>6. Exercise saved queries</h2>
-        <pre><code>python -m agent_hub create-saved-query tasks "Needs Human" --filter status=needs_human
-python -m agent_hub list-saved-queries
+        <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json create-saved-query tasks "Needs Human" --filter status=needs_human
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json create-saved-query tasks "Codex Tasks" --filter project_id=demo-codex
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-saved-queries
 
-python -m agent_hub apply-saved-query &lt;query-id&gt;</code></pre>
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json apply-saved-query &lt;query-id&gt;</code></pre>
       </section>
 
       <section class="section card">
         <h2>7. Confirm dashboard snapshot</h2>
-        <pre><code>python -m agent_hub dashboard
+        <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json dashboard
 curl -s http://127.0.0.1:8080/dashboard | sed -n '1,80p'</code></pre>
       </section>
 
       <section class="section card">
         <h2>Expected result</h2>
         <ul>
-          <li>Tasks move through the queue.</li>
-          <li>The browser app renders current state.</li>
-          <li>The human inbox shows manual-triage work.</li>
-          <li>Saved queries return matching results.</li>
+          <li>Multiple assistant-task records move through one queue.</li>
+          <li>Different repo-agent pairs show up as distinct <code>project_id</code>s.</li>
+          <li>A pipeline shows serial assistant work.</li>
+          <li>The human inbox shows ambiguous or manual-review cases.</li>
+          <li>Saved queries slice the board by assistant or handoff state.</li>
         </ul>
       </section>
     </main>

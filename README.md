@@ -103,23 +103,23 @@ pytest
 Terminal A:
 
 ```bash
-python -m agent_hub serve --port 8080
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json serve --port 8080
 ```
 
 Terminal B:
 
 ```bash
-python -m agent_hub dispatch
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json dispatch
 ```
 
 Terminal C:
 
 ```bash
-python -m agent_hub create-task "hello world" --kind echo --payload "hi"
-python -m agent_hub run-task-template sample-project summarize-input --input "review this idea"
-python -m agent_hub run-pipeline sample-project sample-flow --input "demo"
-python -m agent_hub create-saved-query tasks "Failed Tasks" --filter project_id=sample-project --filter status=failed
-python -m agent_hub dashboard
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "Investigate why the local build script is flaky"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-claude delegate-task --input "Review the proposed fix and summarize risks"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-pipeline demo-codex review-then-implement --input "Add a dry-run mode to the deployment helper"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-human-inbox
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json dashboard
 ```
 
 Then open:
@@ -128,7 +128,7 @@ Then open:
 - `http://127.0.0.1:8080/app`
 - `http://127.0.0.1:8080/dashboard`
 
-More guided steps live in `docs/demo.md`, and the browser-friendly version lives in `docs/demo.html`.
+More guided steps live in `docs/demo.md`, and the browser-friendly version lives in `docs/demo.html`. The runnable assistant-board example registry lives at `examples/agent-driven-projects.example.json`.
 
 ## Default Local State
 
