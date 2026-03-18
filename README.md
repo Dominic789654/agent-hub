@@ -170,44 +170,30 @@ Overrides:
 - persisted filter presets for `tasks` and `pipeline_runs`
 - can be executed later through CLI or HTTP
 
-## Main Commands
+## Common Board Operations
 
-**Setup / Runtime**
-- `python -m agent_hub serve --port 8080`
-- `python -m agent_hub dispatch`
-- `python -m agent_hub dashboard`
-- `python -m agent_hub status`
-- `python -m agent_hub config`
+These examples use the runnable assistant-board registry at `examples/agent-driven-projects.example.json`.
 
-**Task Queue**
-- `python -m agent_hub create-task "hello" --kind echo --payload hi`
-- `python -m agent_hub list-tasks --project-id sample-project --status failed`
-- `python -m agent_hub retry-task <task-id>`
-- `python -m agent_hub cancel-task <task-id>`
-- `python -m agent_hub mark-needs-human <task-id> --note "manual review required"`
+**Start The Board**
+- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json serve --port 8080`
+- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json dispatch`
+- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json dashboard`
 
-**Project Routing**
-- `python -m agent_hub list-projects`
-- `python -m agent_hub list-project-actions sample-project`
-- `python -m agent_hub list-project-task-templates sample-project`
-- `python -m agent_hub list-project-pipelines sample-project`
-- `python -m agent_hub run-task-template sample-project summarize-input --input "hello"`
-- `python -m agent_hub run-pipeline sample-project sample-flow --input "hello"`
+**Launch A Codex Task**
+- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "Investigate why the local build script is flaky"`
 
-**Annotations**
-- `python -m agent_hub add-task-note <task-id> "manual review required"`
-- `python -m agent_hub add-task-label <task-id> important`
-- `python -m agent_hub remove-task-label <task-id> important`
-- `python -m agent_hub add-pipeline-run-note <pipeline-run-id> "watch this run"`
-- `python -m agent_hub add-pipeline-run-label <pipeline-run-id> priority`
-- `python -m agent_hub remove-pipeline-run-label <pipeline-run-id> priority`
+**Launch A Claude Task**
+- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-claude delegate-task --input "Review the proposed fix and summarize risks"`
 
-**Inbox / Queries**
-- `python -m agent_hub list-human-inbox --project-id sample-project`
-- `python -m agent_hub create-saved-query tasks "Failed Tasks" --filter project_id=sample-project --filter status=failed`
-- `python -m agent_hub list-saved-queries --scope tasks`
-- `python -m agent_hub apply-saved-query <query-id>`
-- `python -m agent_hub delete-saved-query <query-id>`
+**Launch Serial Assistant Work**
+- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-pipeline demo-codex review-then-implement --input "Add a dry-run mode to the deployment helper"`
+
+**Inspect And Triage**
+- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-human-inbox`
+- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-saved-queries --scope tasks`
+- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json apply-saved-query <query-id>`
+- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json retry-task <task-id>`
+- `python -m agent_hub --projects-file examples/agent-driven-projects.example.json mark-needs-human <task-id> --note "human should choose whether Codex or Claude owns this task"`
 
 ## HTTP Surface
 
@@ -261,17 +247,12 @@ Overrides:
 **Task Template Intake**
 - `POST /task-templates`
 
-## Example Project Registry
+## Example Project Registries
 
-The repo bootstraps a local example project that includes:
+The repo includes two example registries:
 
-- one project action
-- one task template
-- one pipeline
-
-See:
-
-- `examples/projects.example.json`
+- `examples/agent-driven-projects.example.json` for the recommended code-assistant board pattern
+- `examples/projects.example.json` for the lower-level portable sample registry used by tests and scaffold validation
 
 ## Release Notes
 
