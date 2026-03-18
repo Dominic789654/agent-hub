@@ -92,24 +92,24 @@
 
   <line x1="148" y1="428" x2="682" y2="428" stroke="#E7EBEF"/>
   <text x="156" y="452" class="code">-</text>
-  <text x="246" y="452" class="link">Manual review: publish copy</text>
+  <text x="246" y="452" class="link">Manual review: choose agent</text>
   <text x="462" y="452" class="warn" style="font-size:14px;">needs_human</text>
-  <text x="544" y="452" class="td">review homepage copy</text>
-  <rect x="632" y="438" width="72" height="24" rx="999" fill="#DDF4FF"/>
-  <text x="648" y="454" class="pillText">marketing</text>
+  <text x="544" y="452" class="td">operator chooses owner</text>
+  <rect x="632" y="438" width="56" height="24" rx="999" fill="#DDF4FF"/>
+  <text x="644" y="454" class="pillText">routing</text>
 
   <line x1="148" y1="474" x2="682" y2="474" stroke="#E7EBEF"/>
-  <text x="156" y="498" class="code">sample-project</text>
-  <text x="246" y="498" class="link">Echo pipeline input</text>
+  <text x="156" y="498" class="code">demo-codex</text>
+  <text x="246" y="498" class="link">Implement reviewed change</text>
   <text x="462" y="498" class="warn" style="font-size:14px;">blocked</text>
   <text x="544" y="498" class="td">blocked by failed dep</text>
   <text x="632" y="498" class="td">-</text>
 
   <line x1="148" y1="520" x2="682" y2="520" stroke="#E7EBEF"/>
-  <text x="156" y="544" class="code">sample-project</text>
-  <text x="246" y="544" class="link">Show sample status</text>
+  <text x="156" y="544" class="code">demo-claude</text>
+  <text x="246" y="544" class="link">Review proposed fix and risks</text>
   <text x="462" y="544" class="bad" style="font-size:14px;">failed</text>
-  <text x="544" y="544" class="td">workspace missing</text>
+  <text x="544" y="544" class="td">simulated wrapper failure</text>
   <text x="632" y="544" class="td">-</text>
 
   <rect x="730" y="330" width="530" height="244" rx="10" class="panel"/>
@@ -121,22 +121,22 @@
   <text x="1198" y="414" class="th">Kind</text>
 
   <line x1="746" y1="428" x2="1244" y2="428" stroke="#E7EBEF"/>
-  <text x="754" y="452" class="code">sample-project</text>
-  <text x="862" y="452" class="link">Broken command demo</text>
+  <text x="754" y="452" class="code">demo-codex</text>
+  <text x="862" y="452" class="link">Codex task: flaky build script</text>
   <text x="1118" y="452" class="bad" style="font-size:14px;">queued</text>
   <text x="1198" y="452" class="code">project_command</text>
 
   <line x1="746" y1="474" x2="1244" y2="474" stroke="#E7EBEF"/>
-  <text x="754" y="498" class="code">-</text>
-  <text x="862" y="498" class="link">Review cross-project inbox rules</text>
+  <text x="754" y="498" class="code">demo-claude</text>
+  <text x="862" y="498" class="link">Claude task: review proposed fix</text>
   <text x="1118" y="498" class="ok" style="font-size:14px;">succeeded</text>
-  <text x="1198" y="498" class="code">echo</text>
+  <text x="1198" y="498" class="code">project_command</text>
 
   <line x1="746" y1="520" x2="1244" y2="520" stroke="#E7EBEF"/>
-  <text x="754" y="544" class="code">sample-project</text>
-  <text x="862" y="544" class="link">Summarize: draft launch checklist</text>
+  <text x="754" y="544" class="code">demo-codex</text>
+  <text x="862" y="544" class="link">Review Then Implement: dry-run mode</text>
   <text x="1118" y="544" class="ok" style="font-size:14px;">succeeded</text>
-  <text x="1198" y="544" class="code">echo</text>
+  <text x="1198" y="544" class="code">pipeline</text>
 
   <!-- panels row 2 -->
   <rect x="132" y="604" width="350" height="246" rx="10" class="panel"/>
@@ -151,8 +151,8 @@
   <text x="314" y="726" class="code">{status: needs_human}</text>
   <line x1="148" y1="748" x2="466" y2="748" stroke="#E7EBEF"/>
   <text x="156" y="772" class="code">tasks</text>
-  <text x="226" y="772" class="link">Failed Tasks</text>
-  <text x="314" y="772" class="code">{status: failed}</text>
+  <text x="226" y="772" class="link">Codex Tasks</text>
+  <text x="314" y="772" class="code">{project_id: demo-codex}</text>
 
   <rect x="514" y="604" width="368" height="246" rx="10" class="panel"/>
   <text x="538" y="638" class="section-title">Pipeline Runs</text>
@@ -160,8 +160,8 @@
   <text x="538" y="688" class="th">Project</text>
   <text x="662" y="688" class="th">Pipeline</text>
   <text x="774" y="688" class="th">Progress</text>
-  <text x="538" y="726" class="code">sample-project</text>
-  <text x="662" y="726" class="link">sample-flow</text>
+  <text x="538" y="726" class="code">demo-codex</text>
+  <text x="662" y="726" class="link">review-then-implement</text>
   <text x="774" y="726" class="td">1 / 2 terminal</text>
   <text x="538" y="756" class="muted">failed: 1 · blocked: 1</text>
 
@@ -171,7 +171,7 @@
   <text x="938" y="692" class="th">Data Dir</text>
   <text x="1034" y="692" class="code">/tmp/agenthub-demo-data</text>
   <text x="938" y="732" class="th">Projects</text>
-  <text x="1034" y="732" class="code">projects.json</text>
+  <text x="1034" y="732" class="code">agent-driven-projects.example.json</text>
   <text x="938" y="772" class="th">Database</text>
   <text x="1034" y="772" class="code">agent_hub.db</text>
 </svg>
