@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>agent-hub — Local-first control plane for agent work</title>
+    <title>agent-hub — Local-first multitask board for code assistants</title>
     <meta
       name="description"
-      content="agent-hub is a local-first control plane for routing and observing agent work across projects, with SQLite queueing, dependency-aware dispatch, templates, pipelines, human inbox, and a thin dashboard."
+      content="agent-hub is a local-first multitask board for routing and observing code-assistant work across projects, with SQLite queueing, dependency-aware dispatch, templates, pipelines, human inbox, and a thin dashboard."
     >
     <style>
       :root {
@@ -377,11 +377,11 @@
       <div class="container hero-grid">
         <section>
           <div class="eyebrow">Local-first · SQLite-backed · OSS MVP</div>
-          <h1>One place to route, observe, and unblock agent work.</h1>
+          <h1>One multitask board for your code assistants.</h1>
           <p class="hero-copy">
-            agent-hub gives a single operator a concrete control plane for multi-project agent workflows:
-            queue tasks, model dependencies, launch templates and pipelines, track retries and blocked work,
-            surface human handoff, and inspect the entire system through CLI, HTTP, JSON, and a thin dashboard.
+            agent-hub gives a single operator a concrete control surface for multi-project code-assistant workflows:
+            queue coding tasks, route them into repo-local agents, model dependencies, track blocked work and retries,
+            surface human handoff, and inspect the whole system through CLI, HTTP, JSON, and a thin dashboard.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="https://github.com/Dominic789654/agent-hub">View on GitHub</a>
@@ -389,7 +389,7 @@
             <a class="button" href="https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0">v0.1.0 release</a>
           </div>
           <div class="meta-row">
-            <span class="pill">Task queue</span>
+            <span class="pill">Code-assistant queue</span>
             <span class="pill">Dependency-aware dispatch</span>
             <span class="pill">Task templates</span>
             <span class="pill">Pipelines</span>
@@ -402,10 +402,10 @@
           <div class="stack">
             <div>
               <span class="kicker">Why it exists</span>
-              <h3>Keep orchestration small and inspectable.</h3>
+              <h3>Keep assistant coordination small and inspectable.</h3>
               <p>
-                The project is intentionally narrow: standard-library Python, local state, explicit queue records,
-                and clear extension points instead of a heavy workflow platform.
+                The project is intentionally narrow: standard-library Python, local state, explicit task records,
+                and clear extension points instead of a generic workflow platform.
               </p>
             </div>
 
@@ -416,7 +416,7 @@
               </div>
               <div class="metric">
                 <strong>Projects as routing keys</strong>
-                <span class="section-intro">Point tasks at local repos and reusable command surfaces.</span>
+                <span class="section-intro">Point assistant tasks at local repos and reusable command surfaces.</span>
               </div>
               <div class="metric">
                 <strong>Human handoff built in</strong>
@@ -429,7 +429,7 @@
             </div>
 
             <div class="quote">
-              Good control planes do not hide work. They make task state, dependencies, retries, and operator intervention explicit.
+              Good code-assistant control planes do not hide work. They make task state, dependencies, retries, and operator intervention explicit.
             </div>
           </div>
         </aside>
@@ -442,7 +442,7 @@
           <div>
             <h2>Main capabilities</h2>
             <p class="section-intro">
-              The current release focuses on the pieces you need before layering on bigger workflow systems:
+              The current release focuses on the pieces you need before layering on bigger assistant systems:
               durable queue state, dependency handling, project routing, and thin operator visibility.
             </p>
           </div>
@@ -451,13 +451,13 @@
         <div class="grid grid-3">
           <article class="card">
             <span class="kicker">Queue core</span>
-            <h3>Durable task lifecycle</h3>
-            <p>SQLite-backed tasks, dependency edges, retries, cancellation, blocked-state propagation, and run history.</p>
+            <h3>Durable assistant task lifecycle</h3>
+            <p>SQLite-backed assistant tasks, dependency edges, retries, cancellation, blocked-state propagation, and run history.</p>
           </article>
           <article class="card">
             <span class="kicker">Project routing</span>
             <h3>Actions, templates, and pipelines</h3>
-            <p>Route work into reusable project-backed commands and instantiate bounded multi-step flows.</p>
+            <p>Route coding work into reusable project-backed agent commands and instantiate bounded multi-step flows.</p>
           </article>
           <article class="card">
             <span class="kicker">Operator visibility</span>
@@ -541,22 +541,22 @@
           <div>
             <h2>Where it fits</h2>
             <p class="section-intro">
-              agent-hub works best when one operator needs one control surface for many local repos and bounded agent tasks.
+              agent-hub works best when one operator needs one control surface for many local repos and bounded code-assistant tasks.
             </p>
           </div>
         </div>
 
         <div class="grid grid-3">
           <article class="card">
-            <h3>Cross-repo task routing</h3>
-            <p>Accept natural-language intent, map it to a target project, and launch a bounded task with explicit deliverables.</p>
+            <h3>Cross-repo assistant routing</h3>
+            <p>Accept natural-language intent, map it to a target project, and launch a bounded assistant task with explicit deliverables.</p>
           </article>
           <article class="card">
             <h3>Serial and parallel workflows</h3>
             <p>Model dependencies when one task must wait, while still allowing unrelated work to run in parallel.</p>
           </article>
           <article class="card">
-            <h3>Human-in-the-loop automation</h3>
+            <h3>Human-in-the-loop coding</h3>
             <p>Run as much as possible automatically, then stop clearly when a hard case needs manual review.</p>
           </article>
         </div>
@@ -569,7 +569,7 @@
           <div>
             <h2>Recommended workflow</h2>
             <p class="section-intro">
-              The best current usage pattern is to put <code>agent-hub</code> in front of your existing repo-local coding agents instead of trying to replace them.
+              The best current usage pattern is to use <code>agent-hub</code> as a multitask board in front of your existing repo-local coding agents instead of trying to replace them.
             </p>
           </div>
         </div>
@@ -577,7 +577,7 @@
         <div class="grid grid-3">
           <article class="card">
             <span class="kicker">1</span>
-            <h3>Keep one control plane</h3>
+            <h3>Keep one multitask board</h3>
             <p>Run <code>agent-hub</code> as the queue, routing, dependency, and visibility layer that the operator talks to directly.</p>
           </article>
           <article class="card">
@@ -593,7 +593,7 @@
         </div>
 
         <div class="cta" style="margin-top: 1rem;">
-          <h3 style="margin-top: 0;">Bring your own code agent. Use agent-hub as the explicit queue in front of it.</h3>
+          <h3 style="margin-top: 0;">Bring your own code agent. Use agent-hub as the multitask board in front of it.</h3>
           <p class="section-intro" style="max-width: none;">
             This is the most natural fit for the public MVP: one operator surface, many repos, explicit dependencies, and coding agents launched through controlled local commands.
           </p>
@@ -610,7 +610,7 @@
           <div>
             <h2>How one request becomes many bounded tasks</h2>
             <p class="section-intro">
-              The control plane value is not just execution. It is the normalization step: convert a vague request into explicit project targets, bounded work items, and dependency-aware scheduling.
+              The control-plane value is not just execution. It is the normalization step: convert a vague coding request into explicit project targets, bounded assistant tasks, and dependency-aware scheduling.
             </p>
           </div>
         </div>
@@ -710,7 +710,7 @@
           <div>
             <h2>Fastest way to try it</h2>
             <p class="section-intro">
-              Start the web surface, run the dispatcher, queue example work, then open the dashboard and browser app.
+              Start the web surface, run the dispatcher, queue example assistant work, then open the dashboard and browser app.
             </p>
           </div>
         </div>
@@ -732,7 +732,7 @@ python -m agent_hub dashboard</code></pre>
           <div class="stack">
             <article class="card">
               <h3>What you will see</h3>
-              <p>A queue that processes tasks and pipelines, a human inbox for triage, saved queries, and a read-only dashboard snapshot.</p>
+              <p>A queue that processes assistant tasks and pipelines, a human inbox for triage, saved queries, and a read-only dashboard snapshot.</p>
             </article>
             <article class="card">
               <h3>What it is not trying to be</h3>
@@ -805,9 +805,9 @@ python -m agent_hub dashboard</code></pre>
         </div>
 
         <div class="cta" style="margin-top: 1rem;">
-          <h3 style="margin-top: 0;">Start with a small queue, not a giant platform.</h3>
+          <h3 style="margin-top: 0;">Start with a small assistant board, not a giant platform.</h3>
           <p class="section-intro" style="max-width: none; margin-bottom: 0;">
-            agent-hub is useful when you want explicit task routing and operator visibility today, while leaving room to grow into stricter policies and richer integrations later.
+            agent-hub is useful when you want explicit code-assistant routing and operator visibility today, while leaving room to grow into stricter policies and richer integrations later.
           </p>
         </div>
       </div>

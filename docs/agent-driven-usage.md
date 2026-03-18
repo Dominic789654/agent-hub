@@ -1,14 +1,14 @@
-# Recommended Agent-Driven Usage
+# Recommended Code-Assistant Workflow
 
 This document describes the usage pattern that best matches the current OSS slice of `agent-hub`.
 
 The short version:
 
-- use `agent-hub` as the control plane
+- use `agent-hub` as the multitask board and control plane
 - use your existing coding agents as repo-local executors
 - let `agent-hub` queue, route, sequence, and expose the work
 
-This is the most honest framing of the public MVP. `agent-hub` does not try to replace Claude Code, Codex, Kimi Code, or Qwen Code. It gives you one explicit queue and routing layer in front of them.
+This is the most honest framing of the public MVP. `agent-hub` does not try to replace Claude Code, Codex, Kimi Code, or Qwen Code. It gives you one explicit multitask board and routing layer in front of them.
 
 ## Recommended Topology
 
@@ -22,7 +22,7 @@ Use three layers:
 2. **Control-plane layer**
    - `agent-hub serve`
    - `agent-hub dispatch`
-   - task queue, dependencies, saved views, human handoff
+- assistant task queue, dependencies, saved views, human handoff
 
 3. **Executor layer**
    - repo-local agent wrappers
@@ -40,7 +40,7 @@ It maps directly onto the current implementation:
 
 This means the clean public story is:
 
-> `agent-hub` decides what should run, in what order, against which repo.  
+> `agent-hub` decides which assistant task should run, in what order, against which repo.  
 > Your code agent decides how to do the actual work inside that repo.
 
 ## Recommended Setup
@@ -150,7 +150,7 @@ python -m agent_hub run-task-template trading-claude delegate-task --input "Revi
 
 This gives you:
 
-- a queued record
+- a queued assistant-task record
 - project routing
 - run logs
 - retry / cancel controls
@@ -168,7 +168,7 @@ For parallel work:
 - queue independent tasks against different `project_id`s
 - let the dispatcher claim them independently
 
-This is where `agent-hub` adds leverage: not by being the agent, but by giving one place to reason about order, visibility, and handoff.
+This is where `agent-hub` adds leverage: not by being the agent, but by giving one place to reason about many code-assistant tasks, order, visibility, and handoff.
 
 ## Good Public Defaults
 
@@ -196,4 +196,4 @@ So the right public message is:
 
 ## Suggested Public Sentence
 
-> If you already use Claude Code, Codex, Kimi Code, or Qwen Code in local repos, `agent-hub` gives you one explicit control plane in front of them.
+> If you already use Claude Code, Codex, Kimi Code, or Qwen Code in local repos, `agent-hub` gives you one explicit multitask board in front of them.

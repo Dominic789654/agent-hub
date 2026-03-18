@@ -4,16 +4,16 @@
 [![Release](https://img.shields.io/badge/release-v0.1.0-7EF0C4)](https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0)
 [![License](https://img.shields.io/badge/license-Apache--2.0-C0B0FF)](./LICENSE)
 
-Local-first control plane for routing and observing agent work across projects.
+Local-first multitask board for routing and observing code-assistant work across projects.
 
 Quick links: [Live Site](https://dominic789654.github.io/agent-hub/) · [Demo Page](https://dominic789654.github.io/agent-hub/demo.html) · [Repository](https://github.com/Dominic789654/agent-hub) · [First Release](https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0)
 
 This OSS repo is the portable, public-safe slice of the broader idea:
 
-- queue tasks in SQLite
-- route tasks to safe built-in executors or project-backed commands
+- queue code-assistant tasks in SQLite
+- route work into repo-local code agents through project-backed commands
 - model dependencies, retries, blocking, and human handoff
-- expose a small HTTP surface and a thin browser dashboard
+- expose a small HTTP surface and a thin browser dashboard for multitask visibility
 
 The codebase stays intentionally small and uses the Python standard library only.
 
@@ -32,7 +32,7 @@ The codebase stays intentionally small and uses the Python standard library only
 
 Current status: public-safe OSS MVP.
 
-- ready to share as a local-first, single-operator control plane baseline
+- ready to share as a local-first, single-operator code-assistant multitask baseline
 - suitable for demos, exploration, and extension in local environments
 - not yet positioned as a mature hosted platform or stable long-term API surface
 - scope is intentionally constrained to queueing, routing, visibility, and handoff
@@ -46,13 +46,13 @@ Current status: public-safe OSS MVP.
 
 ## Recommended Usage Pattern
 
-Use `agent-hub` as the control plane, not as a replacement for your coding agent.
+Use `agent-hub` as the multitask board and control plane, not as a replacement for your coding agent.
 
 - keep `agent-hub` responsible for queueing, routing, dependency handling, and visibility
 - keep repo-local coding agents responsible for actual implementation work
 - register those agents as project-backed local commands, then launch them through `agent-hub`
 
-The current OSS slice is a good fit for workflows where you already use tools like Claude Code, Codex, Kimi Code, or Qwen Code in local repos and want one explicit queue in front of them.
+The current OSS slice is a good fit for workflows where you already use tools like Claude Code, Codex, Kimi Code, or Qwen Code in local repos and want one explicit multitask board in front of them.
 
 See `docs/agent-driven-usage.md` for the recommended setup pattern.
 
@@ -60,10 +60,10 @@ See `docs/agent-driven-usage.md` for the recommended setup pattern.
 
 `agent-hub` currently supports:
 
-- task queueing with lifecycle state
+- task queueing for code-assistant work with lifecycle state
 - dependency edges between tasks
 - standalone dispatcher execution
-- project-backed actions, task templates, and pipelines
+- project-backed actions, task templates, and pipelines for repo-local agents
 - task and pipeline run notes / labels
 - saved query presets and execution
 - human inbox aggregation for manual triage
@@ -78,7 +78,7 @@ This repo is not yet:
 - an auth-enabled production service
 - a generic remote executor framework
 
-Treat it as a strong local MVP and OSS foundation, not a finished platform.
+Treat it as a strong local MVP for code-assistant orchestration, not a finished platform.
 
 ## Quick Start
 
