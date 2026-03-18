@@ -42,6 +42,7 @@
       .label { fill: #7EF0C4; font: 700 12px Inter, Arial, sans-serif; letter-spacing: 0.12em; }
       .box-title { fill: #EBF0FF; font: 700 20px Inter, Arial, sans-serif; }
       .box-text { fill: #A8B3D1; font: 500 15px Inter, Arial, sans-serif; }
+      .box-text-small { fill: #A8B3D1; font: 500 14px Inter, Arial, sans-serif; }
       .edge { stroke: #78A8FF; stroke-width: 3.2; stroke-linecap: round; fill: none; marker-end: url(#arrowBlue); }
       .edge-success { stroke: #7EF0C4; stroke-width: 3.2; stroke-linecap: round; fill: none; marker-end: url(#arrowMint); }
       .edge-danger { stroke: #F08AA8; stroke-width: 3.2; stroke-linecap: round; fill: none; marker-end: url(#arrowRose); }
@@ -53,7 +54,7 @@
   <rect x="40" y="30" width="1120" height="640" rx="34" fill="url(#bg)" stroke="rgba(255,255,255,0.12)"/>
 
   <text x="92" y="96" class="title">Task lifecycle and handoff</text>
-  <text x="92" y="126" class="subtitle">Queue bounded work, run only ready tasks, and surface hard cases explicitly instead of hiding them.</text>
+  <text x="92" y="126" class="subtitle">Queue bounded work, run only ready tasks, and surface hard cases instead of hiding them.</text>
 
   <rect x="88" y="190" width="210" height="110" rx="24" class="box"/>
   <text x="116" y="224" class="label">INTAKE</text>
@@ -80,7 +81,7 @@
 
   <rect x="936" y="244" width="178" height="102" rx="22" class="box-warning"/>
   <text x="964" y="278" class="label">OUTCOME</text>
-  <text x="964" y="310" class="box-title">Retryable failure</text>
+  <text x="964" y="310" class="box-title">Retryable fail</text>
   <text x="964" y="338" class="box-text">Retry or fix inputs.</text>
 
   <rect x="312" y="412" width="228" height="112" rx="24" class="box-warning"/>
@@ -101,8 +102,9 @@
   <text x="966" y="508" class="box-text">Surface failures,</text>
   <text x="966" y="530" class="box-text">labels, and context.</text>
 
-  <rect x="88" y="568" width="1026" height="58" rx="22" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)"/>
-  <text x="120" y="604" class="box-text">The point is not to automate forever. The point is to make queue state, retry decisions, blocked paths, and manual intervention obvious.</text>
+  <rect x="88" y="560" width="1026" height="70" rx="22" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)"/>
+  <text x="120" y="590" class="box-text-small">The goal is not endless automation. The goal is to make queue state, retry decisions,</text>
+  <text x="120" y="612" class="box-text-small">blocked paths, and manual intervention obvious.</text>
 
   <path d="M298 245H342" class="edge"/>
   <path d="M592 245H638" class="edge"/>
