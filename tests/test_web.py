@@ -540,12 +540,12 @@ class WebTests(unittest.TestCase):
             projects.bootstrap()
 
             pipeline_run = tasks.create_pipeline_run("sample-project", "sample-flow", "hello")
-            first = tasks.create_task("first", kind="echo", project_id="sample-project", pipeline_run_id=pipeline_run.id)
+            tasks.create_task("first", kind="echo", project_id="sample-project", pipeline_run_id=pipeline_run.id)
             second = tasks.create_task("second", kind="noop", project_id="sample-project")
             tasks.mark_failed(second.id, "boom")
 
             app = AgentHubApp(tasks, runtime, projects, settings)
-            filtered_tasks = app.handle_get(f"/tasks?project_id=sample-project&status=failed")
+            filtered_tasks = app.handle_get("/tasks?project_id=sample-project&status=failed")
             filtered_runs = app.handle_get("/pipeline-runs?project_id=sample-project&pipeline_id=sample-flow")
 
             self.assertEqual(filtered_tasks.status.value, 200)

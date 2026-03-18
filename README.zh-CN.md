@@ -2,6 +2,7 @@
 
 [![在线主页](https://img.shields.io/badge/site-live-78A8FF)](https://dominic789654.github.io/agent-hub/)
 [![版本](https://img.shields.io/badge/release-v0.1.0-7EF0C4)](https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0)
+[![CI](https://github.com/Dominic789654/agent-hub/actions/workflows/test.yml/badge.svg)](https://github.com/Dominic789654/agent-hub/actions/workflows/test.yml)
 [![协议](https://img.shields.io/badge/license-Apache--2.0-C0B0FF)](./LICENSE)
 
 面向代码助手的本地优先多任务看板，用来在多个项目之间排队、路由、观察和交接任务。

@@ -401,7 +401,7 @@ class RepositoryTests(unittest.TestCase):
             pipeline_run = tasks.create_pipeline_run("sample-project", "sample-flow", "hello")
             first = tasks.create_task("first", kind="echo", project_id="sample-project", pipeline_run_id=pipeline_run.id)
             second = tasks.create_task("second", kind="noop", project_id="sample-project")
-            third = tasks.create_task("third", kind="noop", project_id="other-project")
+            tasks.create_task("third", kind="noop", project_id="other-project")
             tasks.mark_succeeded(first.id)
             tasks.mark_failed(second.id, "boom")
 

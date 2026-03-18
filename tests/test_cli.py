@@ -566,7 +566,7 @@ class CliTests(unittest.TestCase):
                 ["agent-hub", "--data-dir", str(data_dir), "create-task", "first", "--kind", "echo", "--payload", "hi", "--project-id", "sample-project"],
             ), patch("sys.stdout", first_stdout):
                 self.assertEqual(main(), 0)
-            first = json.loads(first_stdout.getvalue())
+            json.loads(first_stdout.getvalue())
 
             second_stdout = io.StringIO()
             with patch.object(

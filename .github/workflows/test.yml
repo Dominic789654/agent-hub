@@ -31,5 +31,8 @@ jobs:
       - name: Run tests
         run: python -m pytest -q
 
+      - name: Run ruff
+        run: python -m ruff check .
+
       - name: Verify bytecode compilation
         run: python -m compileall src/agent_hub tests
