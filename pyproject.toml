@@ -23,6 +23,12 @@ classifiers = [
 ]
 dependencies = []
 
+[project.urls]
+Homepage = "https://dominic789654.github.io/agent-hub/"
+Documentation = "https://dominic789654.github.io/agent-hub/"
+Repository = "https://github.com/Dominic789654/agent-hub"
+Issues = "https://github.com/Dominic789654/agent-hub/issues"
+
 [project.optional-dependencies]
 dev = [
   "pytest>=8.0",

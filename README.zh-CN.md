@@ -148,4 +148,6 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
 ## 🤝 贡献
 
 - `CONTRIBUTING.md`
+- `CODE_OF_CONDUCT.md`
+- `SUPPORT.md`
 - `SECURITY.md`

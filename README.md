@@ -2,6 +2,7 @@
 
 [![Live Site](https://img.shields.io/badge/site-live-78A8FF)](https://dominic789654.github.io/agent-hub/)
 [![Release](https://img.shields.io/badge/release-v0.1.0-7EF0C4)](https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0)
+[![CI](https://github.com/Dominic789654/agent-hub/actions/workflows/test.yml/badge.svg)](https://github.com/Dominic789654/agent-hub/actions/workflows/test.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-C0B0FF)](./LICENSE)
 [![中文说明](https://img.shields.io/badge/README-%E4%B8%AD%E6%96%87-FFB86C)](./README.zh-CN.md)
 
@@ -236,6 +237,8 @@ Before cutting a public release, run the checklist in:
 See:
 
 - `CONTRIBUTING.md`
+- `CODE_OF_CONDUCT.md`
+- `SUPPORT.md`
 - `SECURITY.md`
 
 ## 🔒 Safety

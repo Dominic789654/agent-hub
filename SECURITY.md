@@ -4,6 +4,8 @@
 
 This repository is an early local-first OSS project. It is not positioned as a hardened hosted service.
 
+Supported versions: only the latest `main` branch and the latest tagged OSS MVP release are considered in scope for fixes.
+
 Please report:
 
 - credential exposure
@@ -14,7 +16,23 @@ Please report:
 
 ## Reporting
 
-Until a dedicated security channel exists, open a private report through the repository hosting platform if available. If private reporting is not available, avoid posting exploit details publicly before maintainers respond.
+Preferred path:
+
+- use GitHub private vulnerability reporting / repository security advisories if the repository UI exposes it
+
+Fallback path:
+
+- if private reporting is unavailable, contact the repository owner through GitHub profile contact options and do not publish exploit details publicly
+
+Public issues are acceptable only for low-detail coordination messages that avoid exploit steps, credentials, or proof-of-concept payloads.
+
+## Response Expectations
+
+- initial acknowledgement target: within 7 days
+- triage target for reproducible reports: within 14 days
+- fix timing depends on severity, maintainership availability, and whether the issue fits the documented local-first scope
+
+This repository is maintained as an OSS MVP. Best-effort handling is the expectation; there is no enterprise SLA.
 
 ## Expected Boundaries
 
