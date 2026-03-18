@@ -17,7 +17,7 @@ This OSS repo is the portable, public-safe slice of the broader idea:
 
 The codebase stays intentionally small and uses the Python standard library only.
 
-## Project Site
+## 🌐 Project Site
 
 - live site: `https://dominic789654.github.io/agent-hub/`
 - landing page: `docs/index.html`
@@ -28,7 +28,7 @@ The codebase stays intentionally small and uses the Python standard library only
 - public release: `https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0`
 - GitHub Pages publish is wired through `.github/workflows/pages.yml`
 
-## Current Status
+## 🚦 Current Status
 
 Current status: public-safe OSS MVP.
 
@@ -37,14 +37,14 @@ Current status: public-safe OSS MVP.
 - not yet positioned as a mature hosted platform or stable long-term API surface
 - scope is intentionally constrained to queueing, routing, visibility, and handoff
 
-## Near-Term Roadmap
+## 🗺️ Near-Term Roadmap
 
 - improve example projects and end-to-end walkthroughs
 - add richer screenshots or UI captures for the public site
 - tighten public API framing and compatibility expectations
 - expand executor and policy examples without turning the repo into a heavy platform
 
-## Recommended Usage Pattern
+## 🤖 Recommended Usage Pattern
 
 Use `agent-hub` as the multitask board and control plane, not as a replacement for your coding agent.
 
@@ -56,7 +56,7 @@ The current OSS slice is a good fit for workflows where you already use tools li
 
 See `docs/agent-driven-usage.md` for the recommended setup pattern.
 
-## Not A Traditional Task Board
+## 🚫 Not A Traditional Task Board
 
 `agent-hub` is not meant to be a generic to-do tracker for arbitrary operator commands.
 
@@ -65,7 +65,7 @@ See `docs/agent-driven-usage.md` for the recommended setup pattern.
 - the main value is routing, dependency control, retry visibility, and human handoff
 - the dashboard is for supervising assistant work, not for replacing the assistant itself
 
-## What It Does
+## ✨ What It Does
 
 `agent-hub` currently supports:
 
@@ -78,7 +78,7 @@ See `docs/agent-driven-usage.md` for the recommended setup pattern.
 - human inbox aggregation for manual triage
 - dashboard JSON and a thin browser app at `/app`
 
-## What It Is Not
+## 🧱 What It Is Not
 
 This repo is not yet:
 
@@ -89,7 +89,7 @@ This repo is not yet:
 
 Treat it as a strong local MVP for code-assistant orchestration, not a finished platform.
 
-## Quick Start
+## ⚡ Quick Start
 
 ```bash
 python -m venv .venv
@@ -98,7 +98,7 @@ pip install -e .[dev]
 pytest
 ```
 
-## Five-Minute Operator Flow
+## ⏱️ Five-Minute Operator Flow
 
 The intended usage is:
 
@@ -106,19 +106,19 @@ The intended usage is:
 - one background terminal for the dispatcher
 - one assistant terminal where you talk to Codex or Claude Code
 
-**Background terminal A**
+**🖥️ Background terminal A**
 
 ```bash
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json serve --port 8080
 ```
 
-**Background terminal B**
+**🖥️ Background terminal B**
 
 ```bash
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json dispatch
 ```
 
-**Assistant terminal**
+**💬 Assistant terminal**
 
 Open Codex or Claude Code in the environment where you want to operate the board, then ask it to submit tasks for you.
 
@@ -139,7 +139,7 @@ Then open:
 
 If you want the lower-level CLI walkthrough, use `docs/demo.md` or `docs/demo.html`. The runnable assistant-board example registry lives at `examples/agent-driven-projects.example.json`.
 
-## Default Local State
+## 📁 Default Local State
 
 - data dir: `./.agent-hub/`
 - database: `./.agent-hub/agent_hub.db`
@@ -152,18 +152,18 @@ Overrides:
 - `AGENT_HUB_DATA_DIR`
 - `AGENT_HUB_PROJECTS_FILE`
 
-## Common Board Operations
+## 🧰 Common Board Operations
 
 These are the operations your assistant should usually perform on your behalf.
 
-**What You Ask The Assistant**
+**🗣️ What You Ask The Assistant**
 - `Create a Codex task in demo-codex for this bug report.`
 - `Create a Claude review task for the proposed fix.`
 - `Queue the review-then-implement pipeline in demo-codex.`
 - `Check the human inbox and summarize what needs routing.`
 - `Retry the failed Codex task and tell me what changed.`
 
-**What The Assistant Uses Under The Hood**
+**⚙️ What The Assistant Uses Under The Hood**
 - `python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "..."`
 - `python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-claude delegate-task --input "..."`
 - `python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-pipeline demo-codex review-then-implement --input "..."`
@@ -172,7 +172,7 @@ These are the operations your assistant should usually perform on your behalf.
 
 The CLI remains important, but mostly as the mechanism behind the assistant-facing workflow, not as the primary operator experience.
 
-## If You Want The Technical Details
+## 📚 If You Want The Technical Details
 
 - architecture notes: `docs/architecture.md`
 - assistant-first workflow: `docs/agent-driven-usage.md`
@@ -181,14 +181,14 @@ The CLI remains important, but mostly as the mechanism behind the assistant-faci
 - release / launch checklist: `docs/public-launch-checklist.md`
 - public release notes: `docs/release-notes-v0.1.0.md`
 
-## Example Project Registries
+## 🧪 Example Project Registries
 
 The repo includes two example registries:
 
 - `examples/agent-driven-projects.example.json` for the recommended code-assistant board pattern
 - `examples/projects.example.json` for the lower-level portable sample registry used by tests and scaffold validation
 
-## Release Notes
+## 📝 Release Notes
 
 Before cutting a public release, run the checklist in:
 
@@ -199,14 +199,14 @@ Before cutting a public release, run the checklist in:
 - `docs/public-repo-commands.md`
 - `docs/release-notes-v0.1.0.md`
 
-## Contributing
+## 🤝 Contributing
 
 See:
 
 - `CONTRIBUTING.md`
 - `SECURITY.md`
 
-## Safety
+## 🔒 Safety
 
 - no private infrastructure assumptions
 - no secrets in examples
