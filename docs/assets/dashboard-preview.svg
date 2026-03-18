@@ -24,7 +24,9 @@
       .th { fill: #57606A; font: 700 14px Inter, Arial, sans-serif; }
       .td { fill: #24292F; font: 500 14px Inter, Arial, sans-serif; }
       .code { fill: #24292F; font: 500 13px "SFMono-Regular", Consolas, monospace; }
+      .code-sm { fill: #24292F; font: 500 12px "SFMono-Regular", Consolas, monospace; }
       .link { fill: #0969DA; font: 500 14px Inter, Arial, sans-serif; }
+      .link-sm { fill: #0969DA; font: 500 13px Inter, Arial, sans-serif; }
       .pillText { fill: #0969DA; font: 600 12px Inter, Arial, sans-serif; }
     </style>
   </defs>
@@ -64,7 +66,8 @@
     <text x="684" y="279" class="bad">1</text>
 
     <rect x="774" y="214" width="124" height="86" rx="10" class="panel"/>
-    <text x="794" y="244" class="card-k">Needs Human</text>
+    <text x="794" y="240" class="card-k" style="font-size:13px;">Needs</text>
+    <text x="794" y="256" class="card-k" style="font-size:13px;">Human</text>
     <text x="794" y="279" class="warn">1</text>
 
     <rect x="914" y="214" width="102" height="86" rx="10" class="panel"/>
@@ -72,7 +75,8 @@
     <text x="934" y="279" class="warn">1</text>
 
     <rect x="1032" y="214" width="126" height="86" rx="10" class="panel"/>
-    <text x="1052" y="244" class="card-k">Human Inbox</text>
+    <text x="1052" y="240" class="card-k" style="font-size:13px;">Human</text>
+    <text x="1052" y="256" class="card-k" style="font-size:13px;">Inbox</text>
     <text x="1052" y="279" class="warn">3</text>
 
     <rect x="1174" y="214" width="86" height="86" rx="10" class="panel"/>
@@ -92,24 +96,24 @@
 
   <line x1="148" y1="428" x2="682" y2="428" stroke="#E7EBEF"/>
   <text x="156" y="452" class="code">-</text>
-  <text x="246" y="452" class="link">Manual review: choose agent</text>
+  <text x="246" y="452" class="link-sm">Manual review: choose owner</text>
   <text x="462" y="452" class="warn" style="font-size:14px;">needs_human</text>
-  <text x="544" y="452" class="td">operator chooses owner</text>
+  <text x="544" y="452" class="td">owner undecided</text>
   <rect x="632" y="438" width="56" height="24" rx="999" fill="#DDF4FF"/>
   <text x="644" y="454" class="pillText">routing</text>
 
   <line x1="148" y1="474" x2="682" y2="474" stroke="#E7EBEF"/>
   <text x="156" y="498" class="code">demo-codex</text>
-  <text x="246" y="498" class="link">Implement reviewed change</text>
+  <text x="246" y="498" class="link-sm">Implement reviewed fix</text>
   <text x="462" y="498" class="warn" style="font-size:14px;">blocked</text>
-  <text x="544" y="498" class="td">blocked by failed dep</text>
+  <text x="544" y="498" class="td">failed dep</text>
   <text x="632" y="498" class="td">-</text>
 
   <line x1="148" y1="520" x2="682" y2="520" stroke="#E7EBEF"/>
   <text x="156" y="544" class="code">demo-claude</text>
-  <text x="246" y="544" class="link">Review proposed fix and risks</text>
+  <text x="246" y="544" class="link-sm">Review fix + operator risks</text>
   <text x="462" y="544" class="bad" style="font-size:14px;">failed</text>
-  <text x="544" y="544" class="td">simulated wrapper failure</text>
+  <text x="544" y="544" class="td">wrapper fail</text>
   <text x="632" y="544" class="td">-</text>
 
   <rect x="730" y="330" width="530" height="244" rx="10" class="panel"/>
@@ -122,19 +126,19 @@
 
   <line x1="746" y1="428" x2="1244" y2="428" stroke="#E7EBEF"/>
   <text x="754" y="452" class="code">demo-codex</text>
-  <text x="862" y="452" class="link">Codex task: flaky build script</text>
+  <text x="862" y="452" class="link-sm">Flaky build investigation</text>
   <text x="1118" y="452" class="bad" style="font-size:14px;">queued</text>
-  <text x="1198" y="452" class="code">project_command</text>
+  <text x="1198" y="452" class="code-sm">cmd</text>
 
   <line x1="746" y1="474" x2="1244" y2="474" stroke="#E7EBEF"/>
   <text x="754" y="498" class="code">demo-claude</text>
-  <text x="862" y="498" class="link">Claude task: review proposed fix</text>
+  <text x="862" y="498" class="link-sm">Review proposed fix</text>
   <text x="1118" y="498" class="ok" style="font-size:14px;">succeeded</text>
-  <text x="1198" y="498" class="code">project_command</text>
+  <text x="1198" y="498" class="code-sm">cmd</text>
 
   <line x1="746" y1="520" x2="1244" y2="520" stroke="#E7EBEF"/>
   <text x="754" y="544" class="code">demo-codex</text>
-  <text x="862" y="544" class="link">Review Then Implement: dry-run mode</text>
+  <text x="862" y="544" class="link-sm">Dry-run review pipeline</text>
   <text x="1118" y="544" class="ok" style="font-size:14px;">succeeded</text>
   <text x="1198" y="544" class="code">pipeline</text>
 
@@ -148,11 +152,11 @@
   <line x1="148" y1="702" x2="466" y2="702" stroke="#E7EBEF"/>
   <text x="156" y="726" class="code">tasks</text>
   <text x="226" y="726" class="link">Needs Human</text>
-  <text x="314" y="726" class="code">{status: needs_human}</text>
+  <text x="314" y="726" class="code-sm">status=needs_human</text>
   <line x1="148" y1="748" x2="466" y2="748" stroke="#E7EBEF"/>
   <text x="156" y="772" class="code">tasks</text>
   <text x="226" y="772" class="link">Codex Tasks</text>
-  <text x="314" y="772" class="code">{project_id: demo-codex}</text>
+  <text x="314" y="772" class="code-sm">project=demo-codex</text>
 
   <rect x="514" y="604" width="368" height="246" rx="10" class="panel"/>
   <text x="538" y="638" class="section-title">Pipeline Runs</text>
@@ -161,17 +165,18 @@
   <text x="662" y="688" class="th">Pipeline</text>
   <text x="774" y="688" class="th">Progress</text>
   <text x="538" y="726" class="code">demo-codex</text>
-  <text x="662" y="726" class="link">review-then-implement</text>
-  <text x="774" y="726" class="td">1 / 2 terminal</text>
+  <text x="662" y="726" class="link-sm">review-then-impl</text>
+  <text x="774" y="726" class="td">1 / 2 done</text>
   <text x="538" y="756" class="muted">failed: 1 · blocked: 1</text>
 
   <rect x="914" y="604" width="346" height="246" rx="10" class="panel"/>
   <text x="938" y="638" class="section-title">Configuration</text>
   <line x1="914" y1="658" x2="1260" y2="658" stroke="#D8DEE4"/>
   <text x="938" y="692" class="th">Data Dir</text>
-  <text x="1034" y="692" class="code">/tmp/agenthub-demo-data</text>
+  <text x="1034" y="692" class="code-sm">/tmp/agenthub-demo-data</text>
   <text x="938" y="732" class="th">Projects</text>
-  <text x="1034" y="732" class="code">agent-driven-projects.example.json</text>
-  <text x="938" y="772" class="th">Database</text>
-  <text x="1034" y="772" class="code">agent_hub.db</text>
+  <text x="1034" y="732" class="code-sm">agent-driven-projects</text>
+  <text x="1034" y="748" class="code-sm">.example.json</text>
+  <text x="938" y="790" class="th">Database</text>
+  <text x="1034" y="790" class="code-sm">agent_hub.db</text>
 </svg>
