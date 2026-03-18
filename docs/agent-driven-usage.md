@@ -62,17 +62,21 @@ Instead, treat it as:
 
 ### 1. Keep the control plane in its own terminal
 
+For the public OSS demo and first-run path, use the checked-in registry at `examples/agent-driven-projects.example.json`.
+
 Terminal A:
 
 ```bash
-python -m agent_hub serve --port 8080
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json serve --port 8080
 ```
 
 Terminal B:
 
 ```bash
-python -m agent_hub dispatch
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json dispatch
 ```
+
+If you omit `--projects-file`, `agent-hub` may fall back to a local bootstrapped registry under `.agent-hub/projects.json`. That path is useful for local experimentation, but it is not the canonical public onboarding path for this repo.
 
 ### 2. Keep agent entrypoints inside each target repo
 
@@ -155,6 +159,13 @@ This model is repetitive, but it is explicit and works well with the current pub
 ## How to Launch Work
 
 Once registered, use `task_templates` as the main intake path.
+
+If you want a public first-run check without creating your own registry yet, use the shipped demo IDs:
+
+```bash
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-projects
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-project-task-templates demo-codex
+```
 
 Example:
 

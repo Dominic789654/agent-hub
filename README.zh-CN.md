@@ -6,7 +6,7 @@
 
 面向代码助手的本地优先多任务看板，用来在多个项目之间排队、路由、观察和交接任务。
 
-快速入口：[在线主页](https://dominic789654.github.io/agent-hub/) · [演示页面](https://dominic789654.github.io/agent-hub/demo.html) · [英文 README](./README.md) · [仓库](https://github.com/Dominic789654/agent-hub)
+快速入口：[在线主页](https://dominic789654.github.io/agent-hub/) · [中文 Demo](https://dominic789654.github.io/agent-hub/demo.zh.html) · [英文 Demo](https://dominic789654.github.io/agent-hub/demo.html) · [英文 README](./README.md) · [仓库](https://github.com/Dominic789654/agent-hub)
 
 这个开源仓库是一个可迁移、可公开分享的最小版本，核心思路很直接：
 
@@ -72,12 +72,28 @@
 
 ## ⚡ 快速开始
 
+环境要求：
+
+- Python `>= 3.11`
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -e .[dev]
 pytest
 ```
+
+## ✅ 最小验证
+
+第一次验证时，统一使用公开 demo 注册表：
+
+```bash
+agent-hub version
+agent-hub --projects-file examples/agent-driven-projects.example.json list-projects
+agent-hub --projects-file examples/agent-driven-projects.example.json list-project-task-templates demo-codex
+```
+
+如果这几条命令都能正常执行，就说明本地安装已经准备好，可以继续公开 demo 流程。
 
 ## ⏱️ 五分钟体验方式
 
@@ -111,11 +127,21 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
 这是这个项目最推荐的交互方式：  
 你主要和代码助手对话，助手在底层调用 `agent-hub`。
 
+如果你想在接入代码助手之前，先手动验证看板，也可以直接执行同一套公开流程：
+
+```bash
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "Investigate why the local build script is flaky"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-pipeline demo-codex review-then-implement --input "Add a dry-run mode"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json dashboard
+```
+
 然后打开：
 
 - `http://127.0.0.1:8080/`
 - `http://127.0.0.1:8080/app`
 - `http://127.0.0.1:8080/dashboard`
+
+公开版默认 onboarding 路径统一使用 `examples/agent-driven-projects.example.json`。
 
 ## 📁 默认本地状态
 
@@ -135,7 +161,7 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
 - 架构说明：`docs/architecture.md`
 - 助手优先使用方式：`docs/agent-driven-usage.md`
 - CLI 演示：`docs/demo.md`
-- 浏览器演示页：`docs/demo.html`
+- 浏览器演示页：`docs/demo.zh.html`
 - 发布清单：`docs/public-launch-checklist.md`
 
 ## 🔒 安全边界

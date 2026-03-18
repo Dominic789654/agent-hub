@@ -12,6 +12,10 @@ The goal is not to teach operators to type a long sequence of board commands by 
 
 ## 1. Install
 
+Requirements:
+
+- Python `>= 3.11`
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate
@@ -19,7 +23,17 @@ pip install -e .[dev]
 bash -n examples/demo-agent-repo/scripts/run_agent_task.sh
 ```
 
-## 2. Start the Web Surface With the Agent-Driven Example
+## 2. Run a Smoke Test
+
+Use the public demo registry before starting the full multi-terminal flow:
+
+```bash
+agent-hub version
+agent-hub --projects-file examples/agent-driven-projects.example.json list-projects
+agent-hub --projects-file examples/agent-driven-projects.example.json list-project-task-templates demo-codex
+```
+
+## 3. Start the Web Surface With the Agent-Driven Example
 
 Use the example projects registry that models repo-agent pairs:
 
@@ -33,7 +47,7 @@ Open:
 - `http://127.0.0.1:8080/app`
 - `http://127.0.0.1:8080/dashboard`
 
-## 3. Start the Dispatcher
+## 4. Start the Dispatcher
 
 In a second terminal:
 
@@ -41,11 +55,18 @@ In a second terminal:
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json dispatch
 ```
 
-## 4. Open Your Assistant Terminal
+## 5. Open Your Assistant Terminal
 
 Open Codex or Claude Code in another terminal in the same environment.
 
 Then ask it to use the board for you.
+
+If you want to evaluate the board manually first, you can skip the assistant for a moment and run:
+
+```bash
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "Investigate why the local build script is flaky"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json dashboard
+```
 
 Example prompts:
 
@@ -63,7 +84,7 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
 
 This demo uses wrapper scripts under `examples/demo-agent-repo/scripts/` as a stand-in for real tools like Claude Code, Codex, Kimi Code, or Qwen Code.
 
-## 5. Ask The Assistant To Inspect Handoff
+## 6. Ask The Assistant To Inspect Handoff
 
 You can also ask the assistant to inspect the board and report back:
 
@@ -84,7 +105,7 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json list-human-inbox
 ```
 
-## 6. Ask The Assistant For Saved Views
+## 7. Ask The Assistant For Saved Views
 
 Once the board has useful slices, the assistant can use saved queries to answer questions like:
 
@@ -105,7 +126,7 @@ Use the returned query id:
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json apply-saved-query <query-id>
 ```
 
-## 7. Confirm The Board View
+## 8. Confirm The Board View
 
 At any point, the assistant or operator can inspect the board state directly:
 

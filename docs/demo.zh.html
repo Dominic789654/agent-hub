@@ -176,6 +176,7 @@
     <main class="container grid">
       <section class="section card">
         <h2>1. 安装</h2>
+        <p>环境要求：Python <code>&gt;= 3.11</code>。</p>
         <pre><code>python -m venv .venv
 source .venv/bin/activate
 pip install -e .[dev]
@@ -183,7 +184,15 @@ bash -n examples/demo-agent-repo/scripts/run_agent_task.sh</code></pre>
       </section>
 
       <section class="section card">
-        <h2>2. 启动 Web 服务</h2>
+        <h2>2. 最小验证</h2>
+        <p>在进入完整多终端演示之前，先用公开 demo 注册表做一次最小验证。</p>
+        <pre><code>agent-hub version
+agent-hub --projects-file examples/agent-driven-projects.example.json list-projects
+agent-hub --projects-file examples/agent-driven-projects.example.json list-project-task-templates demo-codex</code></pre>
+      </section>
+
+      <section class="section card">
+        <h2>3. 启动 Web 服务</h2>
         <p>使用建模了 repo-agent 组合的示例项目注册表。</p>
         <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json serve --port 8080</code></pre>
         <ul>
@@ -194,18 +203,21 @@ bash -n examples/demo-agent-repo/scripts/run_agent_task.sh</code></pre>
       </section>
 
       <section class="section card">
-        <h2>3. 启动 Dispatcher</h2>
+        <h2>4. 启动 Dispatcher</h2>
         <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json dispatch</code></pre>
       </section>
 
       <section class="section card">
-        <h2>4. 打开你的助手终端</h2>
+        <h2>5. 打开你的助手终端</h2>
         <p>在另一个终端里打开 Codex 或 Claude Code，然后让它替你使用这个看板。</p>
         <ul>
           <li><code>在 demo-codex 里创建一个 Codex 任务，排查本地构建脚本为什么不稳定，并总结可能的根因。</code></li>
           <li><code>在 demo-claude 里创建一个 Claude 任务，review 修复方案并指出对操作者有影响的风险。</code></li>
           <li><code>在 demo-codex 里为“给部署脚本增加 dry-run 模式”排队 review-then-implement pipeline。</code></li>
         </ul>
+        <p>如果你想先手动验证看板，也可以暂时不接入助手，直接运行：</p>
+        <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "Investigate why the local build script is flaky"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json dashboard</code></pre>
         <p>底层助手会调用类似下面的命令：</p>
         <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "Investigate why the local build script is flaky and summarize the likely root cause"
 python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-claude delegate-task --input "Review the proposed fix and call out any operator-facing risks"
@@ -214,7 +226,7 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
       </section>
 
       <section class="section card">
-        <h2>5. 让助手检查交接状态</h2>
+        <h2>6. 让助手检查交接状态</h2>
         <p>你也可以让助手直接检查看板并汇报结果。</p>
         <ul>
           <li><code>给我看看 human inbox，并解释哪个任务需要人工路由。</code></li>
@@ -233,7 +245,7 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
       </section>
 
       <section class="section card">
-        <h2>6. 让助手使用保存视图</h2>
+        <h2>7. 让助手使用保存视图</h2>
         <p>当看板上已经有有价值的筛选视图时，助手就可以用保存查询回答类似这样的问题：</p>
         <ul>
           <li><code>只显示 Codex 负责的任务。</code></li>
@@ -248,7 +260,7 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
       </section>
 
       <section class="section card">
-        <h2>7. 确认看板状态</h2>
+        <h2>8. 确认看板状态</h2>
         <p>任何时候，助手或操作者都可以直接检查当前看板状态：</p>
         <pre><code>python -m agent_hub --projects-file examples/agent-driven-projects.example.json dashboard
 curl -s http://127.0.0.1:8080/dashboard | sed -n '1,80p'</code></pre>

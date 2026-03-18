@@ -8,7 +8,7 @@
 
 Local-first multitask board for routing and observing code-assistant work across projects.
 
-Quick links: [Live Site](https://dominic789654.github.io/agent-hub/) · [Demo Page](https://dominic789654.github.io/agent-hub/demo.html) · [中文 README](./README.zh-CN.md) · [Repository](https://github.com/Dominic789654/agent-hub) · [First Release](https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0)
+Quick links: [Live Site](https://dominic789654.github.io/agent-hub/) · [Demo Page](https://dominic789654.github.io/agent-hub/demo.html) · [中文 Demo](https://dominic789654.github.io/agent-hub/demo.zh.html) · [中文 README](./README.zh-CN.md) · [Repository](https://github.com/Dominic789654/agent-hub) · [First Release](https://github.com/Dominic789654/agent-hub/releases/tag/v0.1.0)
 
 This OSS repo is the portable, public-safe slice of the broader idea:
 
@@ -124,12 +124,28 @@ Treat it as a strong local MVP for code-assistant orchestration, not a finished 
 
 ## ⚡ Quick Start
 
+Requirements:
+
+- Python `>= 3.11`
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -e .[dev]
 pytest
 ```
+
+## ✅ Smoke Test
+
+Use the public demo registry for the first verification path:
+
+```bash
+agent-hub version
+agent-hub --projects-file examples/agent-driven-projects.example.json list-projects
+agent-hub --projects-file examples/agent-driven-projects.example.json list-project-task-templates demo-codex
+```
+
+If these commands work, your local install is ready for the public demo flow.
 
 ## ⏱️ Five-Minute Operator Flow
 
@@ -164,11 +180,21 @@ Example prompts:
 
 That is the primary interaction model. The operator mainly talks to the coding assistant, and the assistant uses `agent-hub` to place and inspect work on the board.
 
+If you want to evaluate the board manually before introducing an assistant, you can run the same public flow directly:
+
+```bash
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-task-template demo-codex delegate-task --input "Investigate why the local build script is flaky"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json run-pipeline demo-codex review-then-implement --input "Add a dry-run mode"
+python -m agent_hub --projects-file examples/agent-driven-projects.example.json dashboard
+```
+
 Then open:
 
 - `http://127.0.0.1:8080/`
 - `http://127.0.0.1:8080/app`
 - `http://127.0.0.1:8080/dashboard`
+
+The canonical public onboarding path uses `examples/agent-driven-projects.example.json`.
 
 If you want the lower-level CLI walkthrough, use `docs/demo.md` or `docs/demo.html`. The runnable assistant-board example registry lives at `examples/agent-driven-projects.example.json`.
 
