@@ -9,9 +9,179 @@ import unittest
 from unittest.mock import patch
 
 from agent_hub.cli import main
+from agent_hub.config import resolve_settings
+from agent_hub.db import Database
+from agent_hub.dispatcher import Dispatcher
+from agent_hub.models import RunStatus, TaskStatus
+from agent_hub.projects import ProjectRegistry
+from agent_hub.repository import RuntimeRepository, TaskRepository
+
+
+EXAMPLE_PROJECTS_FILE = Path(__file__).resolve().parents[1] / "examples" / "agent-driven-projects.example.json"
 
 
 class CliTests(unittest.TestCase):
+    def test_public_demo_registry_cli_flow_and_dispatch(self) -> None:
+        with TemporaryDirectory() as tmp:
+            data_dir = Path(tmp) / "data"
+
+            delegated_stdout = io.StringIO()
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "agent-hub",
+                    "--data-dir",
+                    str(data_dir),
+                    "--projects-file",
+                    str(EXAMPLE_PROJECTS_FILE),
+                    "run-task-template",
+                    "demo-codex",
+                    "delegate-task",
+                    "--input",
+                    "Investigate why the local build script is flaky",
+                ],
+            ), patch("sys.stdout", delegated_stdout):
+                self.assertEqual(main(), 0)
+            delegated = json.loads(delegated_stdout.getvalue())
+
+            pipeline_stdout = io.StringIO()
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "agent-hub",
+                    "--data-dir",
+                    str(data_dir),
+                    "--projects-file",
+                    str(EXAMPLE_PROJECTS_FILE),
+                    "run-pipeline",
+                    "demo-codex",
+                    "review-then-implement",
+                    "--input",
+                    "Add a dry-run mode",
+                ],
+            ), patch("sys.stdout", pipeline_stdout):
+                self.assertEqual(main(), 0)
+            pipeline = json.loads(pipeline_stdout.getvalue())
+
+            human_stdout = io.StringIO()
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "agent-hub",
+                    "--data-dir",
+                    str(data_dir),
+                    "--projects-file",
+                    str(EXAMPLE_PROJECTS_FILE),
+                    "create-task",
+                    "Manual review: choose agent",
+                    "--kind",
+                    "noop",
+                    "--project-id",
+                    "demo-claude",
+                ],
+            ), patch("sys.stdout", human_stdout):
+                self.assertEqual(main(), 0)
+            human_task = json.loads(human_stdout.getvalue())
+
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "agent-hub",
+                    "--data-dir",
+                    str(data_dir),
+                    "--projects-file",
+                    str(EXAMPLE_PROJECTS_FILE),
+                    "mark-needs-human",
+                    human_task["id"],
+                    "--note",
+                    "operator chooses owner",
+                ],
+            ):
+                self.assertEqual(main(), 0)
+
+            settings = resolve_settings(data_dir=data_dir, projects_file=EXAMPLE_PROJECTS_FILE)
+            db = Database(settings.data_dir)
+            tasks = TaskRepository(db)
+            runtime = RuntimeRepository(db)
+            projects = ProjectRegistry(settings.projects_file)
+            dispatcher = Dispatcher(task_repository=tasks, runtime_repository=runtime, project_registry=projects)
+
+            while True:
+                claimed = tasks.claim_next_task()
+                if claimed is None:
+                    break
+                run = tasks.create_run(claimed.id)
+                try:
+                    dispatcher._process_task(claimed, run.id)
+                except Exception as exc:  # pragma: no cover - defensive parity with dispatcher loop
+                    tasks.append_run_log(run.id, f"[error] {exc}\n")
+                    tasks.finish_run(run.id, status=RunStatus.FAILED)
+                    tasks.mark_failed(claimed.id, str(exc))
+                else:
+                    tasks.finish_run(run.id, status=RunStatus.SUCCEEDED)
+                    tasks.mark_succeeded(claimed.id)
+
+            delegated_detail = tasks.get_task_detail(delegated["task"]["id"])
+            self.assertIsNotNone(delegated_detail)
+            assert delegated_detail is not None
+            self.assertEqual(delegated_detail.task.status, TaskStatus.SUCCEEDED)
+            self.assertIn("[agent-wrapper] agent=codex", delegated_detail.runs[0].log)
+            self.assertIn("simulated assistant run completed", delegated_detail.runs[0].log)
+
+            implement_task_id = next(
+                item["id"] for item in pipeline["tasks"] if item["title"] == "Implement reviewed change"
+            )
+            implement_detail = tasks.get_task_detail(implement_task_id)
+            self.assertIsNotNone(implement_detail)
+            assert implement_detail is not None
+            self.assertEqual(implement_detail.task.status, TaskStatus.SUCCEEDED)
+            self.assertIn("[agent-wrapper] agent=codex", implement_detail.runs[0].log)
+
+            inbox_stdout = io.StringIO()
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "agent-hub",
+                    "--data-dir",
+                    str(data_dir),
+                    "--projects-file",
+                    str(EXAMPLE_PROJECTS_FILE),
+                    "list-human-inbox",
+                ],
+            ), patch("sys.stdout", inbox_stdout):
+                self.assertEqual(main(), 0)
+            inbox = json.loads(inbox_stdout.getvalue())
+            self.assertEqual(len(inbox["items"]), 1)
+            self.assertEqual(inbox["items"][0]["task"]["project_id"], "demo-claude")
+
+            dashboard_stdout = io.StringIO()
+            with patch.object(
+                sys,
+                "argv",
+                [
+                    "agent-hub",
+                    "--data-dir",
+                    str(data_dir),
+                    "--projects-file",
+                    str(EXAMPLE_PROJECTS_FILE),
+                    "dashboard",
+                    "--limit",
+                    "10",
+                ],
+            ), patch("sys.stdout", dashboard_stdout):
+                self.assertEqual(main(), 0)
+            dashboard = json.loads(dashboard_stdout.getvalue())
+            self.assertEqual(dashboard["status"]["project_count"], 2)
+            self.assertEqual(len(dashboard["human_inbox"]), 1)
+            self.assertTrue(
+                any(item["project_id"] == "demo-codex" for item in dashboard["recent_tasks"]),
+            )
+
     def test_list_runs_and_retry_cancel_commands(self) -> None:
         with TemporaryDirectory() as tmp:
             data_dir = Path(tmp)

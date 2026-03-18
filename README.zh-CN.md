@@ -160,6 +160,7 @@ python -m agent_hub --projects-file examples/agent-driven-projects.example.json 
 
 - 架构说明：`docs/architecture.md`
 - 助手优先使用方式：`docs/agent-driven-usage.md`
+- CLI 速查：`docs/cli-quick-reference.md`
 - CLI 演示：`docs/demo.md`
 - 浏览器演示页：`docs/demo.zh.html`
 - 发布清单：`docs/public-launch-checklist.md`

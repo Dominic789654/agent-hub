@@ -12,6 +12,9 @@ from agent_hub.repository import RuntimeRepository, TaskRepository
 from agent_hub.web import AgentHubApp
 
 
+EXAMPLE_PROJECTS_FILE = Path(__file__).resolve().parents[1] / "examples" / "agent-driven-projects.example.json"
+
+
 class WebTests(unittest.TestCase):
     def test_health_status_and_tasks_routes(self) -> None:
         with TemporaryDirectory() as tmp:
@@ -673,6 +676,46 @@ class WebTests(unittest.TestCase):
             self.assertIsNotNone(detail)
             assert detail is not None
             self.assertIn("[sleep] seconds=0.0", detail.runs[0].log)
+
+    def test_public_demo_registry_web_routes(self) -> None:
+        with TemporaryDirectory() as tmp:
+            settings = resolve_settings(data_dir=Path(tmp) / "data", projects_file=EXAMPLE_PROJECTS_FILE)
+            db = Database(settings.data_dir)
+            db.bootstrap()
+            tasks = TaskRepository(db)
+            runtime = RuntimeRepository(db)
+            projects = ProjectRegistry(settings.projects_file)
+            delegated = tasks.create_task(
+                "Codex task: flaky build",
+                kind="project_command",
+                payload="Investigate flaky build",
+                project_id="demo-codex",
+            )
+            manual = tasks.create_task(
+                "Manual review: choose agent",
+                kind="noop",
+                project_id="demo-claude",
+            )
+            tasks.mark_needs_human(manual.id, note="operator chooses owner")
+
+            app = AgentHubApp(tasks, runtime, projects, settings)
+            projects_payload = app.handle_get("/projects")
+            actions_payload = app.handle_get("/projects/demo-codex/actions")
+            pipelines_payload = app.handle_get("/projects/demo-codex/pipelines")
+            templates_payload = app.handle_get("/projects/demo-codex/task-templates")
+            dashboard = app.handle_get("/dashboard")
+            inbox = app.handle_get("/human-inbox")
+
+            self.assertEqual(projects_payload.status.value, 200)
+            self.assertEqual([item["id"] for item in projects_payload.payload["projects"]], ["demo-claude", "demo-codex"])
+            self.assertEqual(actions_payload.payload["actions"][0]["id"], "agent-health")
+            self.assertEqual(pipelines_payload.payload["pipelines"][0]["id"], "review-then-implement")
+            self.assertEqual(templates_payload.payload["task_templates"][0]["id"], "delegate-task")
+            self.assertEqual(dashboard.payload["status"]["project_count"], 2)
+            self.assertEqual(len(dashboard.payload["human_inbox"]), 1)
+            self.assertTrue(any(item["id"] == delegated.id for item in dashboard.payload["recent_tasks"]))
+            self.assertEqual(len(inbox.payload["items"]), 1)
+            self.assertEqual(inbox.payload["items"][0]["task"]["project_id"], "demo-claude")
 
 
 if __name__ == "__main__":

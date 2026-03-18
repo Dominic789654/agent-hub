@@ -235,6 +235,7 @@ The CLI remains important, but mostly as the mechanism behind the assistant-faci
 
 - architecture notes: `docs/architecture.md`
 - assistant-first workflow: `docs/agent-driven-usage.md`
+- CLI quick reference: `docs/cli-quick-reference.md`
 - runnable board walkthrough: `docs/demo.md`
 - browser-friendly demo: `docs/demo.html`
 - release / launch checklist: `docs/public-launch-checklist.md`
