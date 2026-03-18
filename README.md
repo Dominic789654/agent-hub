@@ -56,6 +56,15 @@ The current OSS slice is a good fit for workflows where you already use tools li
 
 See `docs/agent-driven-usage.md` for the recommended setup pattern.
 
+## Not A Traditional Task Board
+
+`agent-hub` is not meant to be a generic to-do tracker for arbitrary operator commands.
+
+- the primary unit is a bounded code-assistant task
+- the main target is a local repo plus a repo-local coding agent
+- the main value is routing, dependency control, retry visibility, and human handoff
+- the dashboard is for supervising assistant work, not for replacing the assistant itself
+
 ## What It Does
 
 `agent-hub` currently supports:

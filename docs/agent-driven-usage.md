@@ -22,7 +22,7 @@ Use three layers:
 2. **Control-plane layer**
    - `agent-hub serve`
    - `agent-hub dispatch`
-- assistant task queue, dependencies, saved views, human handoff
+   - assistant task queue, dependencies, saved views, human handoff
 
 3. **Executor layer**
    - repo-local agent wrappers
@@ -42,6 +42,21 @@ This means the clean public story is:
 
 > `agent-hub` decides which assistant task should run, in what order, against which repo.  
 > Your code agent decides how to do the actual work inside that repo.
+
+## Not a Traditional Task Board
+
+The best way to understand `agent-hub` is:
+
+- not as a generic instruction board
+- not as a PM ticket system
+- not as a replacement for Claude Code, Codex, Kimi Code, or Qwen Code
+
+Instead, treat it as:
+
+- a multitask board for code assistants
+- a routing layer across repos
+- a queue with explicit dependency and handoff semantics
+- a visibility surface for assistant progress and failures
 
 ## Recommended Setup
 
